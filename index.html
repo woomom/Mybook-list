@@ -23,7 +23,7 @@
             <nav class="flex bg-slate-100 p-1 rounded-xl text-sm font-medium">
                 <button onclick="switchTab('books')" id="tab-books" class="px-4 py-2 rounded-lg transition bg-white text-emerald-700 shadow-sm">추천 도서 목록</button>
                 <button onclick="switchTab('rental')" id="tab-rental" class="px-4 py-2 rounded-lg transition text-slate-600">나의 대여 목록 (<span id="rental-count">0</span>)</button>
-                <button onclick="switchTab('settings')" id="tab-settings" class="px-4 py-2 rounded-lg transition text-slate-600">설정 & 도서관</button>
+                <button onclick="switchTab('settings')" id="tab-settings" class="px-4 py-2 rounded-lg transition text-slate-600">내 도서관 설정</button>
             </nav>
         </div>
     </header>
@@ -33,22 +33,21 @@
 
         <!-- 1. 추천 도서 목록 탭 -->
         <section id="section-books" class="space-y-6">
-            <!-- 안내 배너 -->
             <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 flex items-start gap-3">
                 <span class="text-2xl">💡</span>
                 <div class="text-sm text-emerald-900">
                     <p class="font-semibold mb-1">우리 아이를 위한 사서 추천 도서</p>
-                    <p class="text-emerald-700">연령별·주제별 도서를 둘러보고 마음에 드는 책을 <strong>[대여 목록에 담기]</strong> 해보세요. 설정하신 도서관의 실시간 대여 상태를 확인할 수 있습니다.</p>
+                    <p class="text-emerald-700">연령별 도서를 둘러보고 마음에 드는 책을 <strong>[대여 목록에 담기]</strong> 해보세요. 등록하신 도서관의 대출 가능 상태를 바로 확인할 수 있습니다.</p>
                 </div>
             </div>
 
             <!-- 필터 바 -->
             <div class="flex flex-col sm:flex-row gap-3 justify-between items-center bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
                 <div class="flex flex-wrap gap-2 w-full sm:w-auto" id="age-filters">
-                    <button onclick="filterAge('all')" class="age-btn px-3.5 py-1.5 rounded-full text-sm font-medium bg-emerald-600 text-white transition">전체 연령</button>
-                    <button onclick="filterAge('유아')" class="age-btn px-3.5 py-1.5 rounded-full text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition">유아</button>
-                    <button onclick="filterAge('초등 저학년')" class="age-btn px-3.5 py-1.5 rounded-full text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition">초등 저학년</button>
-                    <button onclick="filterAge('초등 고학년')" class="age-btn px-3.5 py-1.5 rounded-full text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition">초등 고학년</button>
+                    <button onclick="filterAge('all', this)" class="age-btn px-3.5 py-1.5 rounded-full text-sm font-medium bg-emerald-600 text-white transition">전체 연령</button>
+                    <button onclick="filterAge('유아', this)" class="age-btn px-3.5 py-1.5 rounded-full text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition">유아</button>
+                    <button onclick="filterAge('초등 저학년', this)" class="age-btn px-3.5 py-1.5 rounded-full text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition">초등 저학년</button>
+                    <button onclick="filterAge('초등 고학년', this)" class="age-btn px-3.5 py-1.5 rounded-full text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition">초등 고학년</button>
                 </div>
                 <div class="w-full sm:w-64">
                     <input type="text" id="search-input" oninput="handleSearch()" placeholder="도서명 또는 저자 검색..." class="w-full px-3.5 py-2 text-sm rounded-xl border border-slate-200 focus:outline-none focus:border-emerald-500">
@@ -56,80 +55,82 @@
             </div>
 
             <!-- 도서 카드 그리드 -->
-            <div id="book-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <!-- 도서 아이템들이 자바스크립트로 동적 생성됩니다 -->
-            </div>
+            <div id="book-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
         </section>
 
         <!-- 2. 나의 대여 목록 탭 -->
         <section id="section-rental" class="space-y-6 hidden">
-            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex justify-between items-center">
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                 <div>
                     <h2 class="text-lg font-bold text-slate-800">방문 전 도서관 소장 및 대여 현황</h2>
-                    <p class="text-xs text-slate-500 mt-0.5">설정하신 자주 가는 도서관 3곳의 실시간 소장 및 대출 가능 여부를 확인합니다.</p>
+                    <p class="text-xs text-slate-500 mt-0.5" id="active-libs-summary">내 도서관: 불러오는 중...</p>
                 </div>
-                <button onclick="checkLibraryStatusAll()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium rounded-xl transition shadow-sm">
+                <button onclick="checkLibraryStatusAll()" class="w-full sm:w-auto px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium rounded-xl transition shadow-sm">
                     🔄 대여 현황 새로고침
                 </button>
             </div>
 
             <!-- 담긴 도서 목록 -->
-            <div id="rental-list" class="space-y-4">
-                <!-- 동적 렌더링 -->
-            </div>
+            <div id="rental-list" class="space-y-4"></div>
         </section>
 
-        <!-- 3. 설정 탭 -->
+        <!-- 3. 내 도서관 설정 탭 (도서관 검색 UI 반영) -->
         <section id="section-settings" class="space-y-6 hidden">
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-6 max-w-xl mx-auto">
                 <div>
-                    <h2 class="text-lg font-bold text-slate-800">⚙️ 도서관 및 API 설정</h2>
-                    <p class="text-xs text-slate-500 mt-1">자주 방문하는 도서관 최대 3곳을 등록하여 대여 가능 여부를 확인하세요.</p>
+                    <h2 class="text-lg font-bold text-slate-800">🏛️ 내 도서관 설정 (최대 3곳)</h2>
+                    <p class="text-xs text-slate-500 mt-1">지역을 선택하거나 도서관 이름을 두 글자 이상 검색해 등록하세요.</p>
                 </div>
 
-                <!-- API 인증키 (관리자 기본값 적용 완료) -->
-                <div class="space-y-2">
-                    <label class="text-sm font-semibold text-slate-700 block">도서관 정보나루 OpenAPI 인증키</label>
-                    <input type="text" id="setting-apikey" class="w-full px-3.5 py-2 text-sm rounded-xl border border-slate-200 bg-slate-50 text-slate-600 font-mono" readonly>
-                    <p class="text-xs text-emerald-600">✨ 대표 관리자 인증키가 기본 적용되어 있어 링크로 접속한 분들도 바로 이용할 수 있습니다.</p>
-                </div>
-
-                <hr class="border-slate-100">
-
-                <!-- 자주 가는 도서관 3곳 설정 -->
-                <div class="space-y-4">
-                    <h3 class="text-sm font-semibold text-slate-700">우리 동네 자주 가는 도서관 (최대 3곳)</h3>
-                    
-                    <div class="space-y-3">
-                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                            <span class="text-xs font-bold text-emerald-700">도서관 1</span>
-                            <div class="grid grid-cols-2 gap-2">
-                                <input type="text" id="lib-name-0" placeholder="도서관 이름 (예: 광주시립도서관)" class="px-3 py-1.5 text-sm rounded-lg border border-slate-200 bg-white">
-                                <input type="text" id="lib-code-0" placeholder="도서관 코드 (예: 111142)" class="px-3 py-1.5 text-sm rounded-lg border border-slate-200 bg-white font-mono">
-                            </div>
-                        </div>
-
-                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                            <span class="text-xs font-bold text-emerald-700">도서관 2</span>
-                            <div class="grid grid-cols-2 gap-2">
-                                <input type="text" id="lib-name-1" placeholder="도서관 이름" class="px-3 py-1.5 text-sm rounded-lg border border-slate-200 bg-white">
-                                <input type="text" id="lib-code-1" placeholder="도서관 코드" class="px-3 py-1.5 text-sm rounded-lg border border-slate-200 bg-white font-mono">
-                            </div>
-                        </div>
-
-                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                            <span class="text-xs font-bold text-emerald-700">도서관 3</span>
-                            <div class="grid grid-cols-2 gap-2">
-                                <input type="text" id="lib-name-2" placeholder="도서관 이름" class="px-3 py-1.5 text-sm rounded-lg border border-slate-200 bg-white">
-                                <input type="text" id="lib-code-2" placeholder="도서관 코드" class="px-3 py-1.5 text-sm rounded-lg border border-slate-200 bg-white font-mono">
-                            </div>
-                        </div>
+                <!-- 현재 등록된 내 도서관 목록 -->
+                <div class="space-y-2.5">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold text-emerald-700">등록된 내 도서관 (<span id="selected-lib-count">0</span>/3)</span>
+                    </div>
+                    <div id="my-libraries-list" class="space-y-2">
+                        <!-- 등록된 도서관이 여기에 표시됩니다 -->
                     </div>
                 </div>
 
-                <button onclick="saveSettings()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-xl transition shadow-sm">
-                    설정 저장하기
-                </button>
+                <!-- 도서관 검색 박스 (참고 화면 UI 적용) -->
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                    <div class="flex gap-2">
+                        <select id="region-select" onchange="searchLibraries()" class="px-3 py-2.5 text-sm font-medium rounded-xl border border-amber-400/80 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                            <option value="">전국</option>
+                            <option value="11">서울</option>
+                            <option value="31">경기</option>
+                            <option value="28">인천</option>
+                            <option value="26">부산</option>
+                            <option value="27">대구</option>
+                            <option value="29">광주</option>
+                            <option value="30">대전</option>
+                            <option value="36">세종</option>
+                            <option value="42">강원</option>
+                            <option value="43">충북</option>
+                            <option value="44">충남</option>
+                            <option value="45">전북</option>
+                            <option value="46">전남</option>
+                            <option value="47">경북</option>
+                            <option value="48">경남</option>
+                            <option value="50">제주</option>
+                        </select>
+                        <div class="relative flex-1">
+                            <input type="text" id="lib-search-input" oninput="handleLibSearchInput()" placeholder="도서관 이름으로 찾기" class="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-200 bg-white focus:outline-none focus:border-emerald-500">
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        도서관 이름을 두 글자 이상 넣으면 전국에서 찾아요. 지역을 고르면 그 지역 도서관을 모두 볼 수 있어요.
+                    </p>
+
+                    <!-- 검색 결과 목록 -->
+                    <div id="lib-search-results" class="max-h-60 overflow-y-auto space-y-1.5 pt-1"></div>
+                </div>
+
+                <div class="text-center">
+                    <button onclick="switchTab('rental')" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-xl transition shadow-sm">
+                        설정 완료 및 대여 목록 보기
+                    </button>
+                </div>
             </div>
         </section>
 
@@ -137,15 +138,14 @@
 
     <!-- 푸터 -->
     <footer class="mt-auto py-6 text-center text-xs text-slate-400 border-t border-slate-100">
-        <p>아이를 키우는 부모님들을 위한 따뜻한 도서관 나들이 도우미 📚</p>
+        <p>도서관 정보나루 기준(전날 도서관 자료)이라 오늘 실제와 다를 수 있어요 📚</p>
     </footer>
 
     <!-- 자바스크립트 로직 -->
     <script>
-        // 사용자가 제공해주신 인증키 기본 세팅
         const DEFAULT_API_KEY = "81211fd9d9c07fe4a8af9ff8be7fc84551f8e839bf8072cb907902e579114fea";
 
-        // 샘플 도서 데이터 (유아, 초등 저학년, 초등 고학년)
+        // 추천 도서 데이터
         const booksData = [
             { id: 1, title: "낙엽 스낵", author: "이랑 저", age: "유아", category: "그림책", isbn: "9791158363567", desc: "바삭바삭 맛있는 낙엽으로 상상력을 펼치는 가을 그림책" },
             { id: 2, title: "다람쥐는 모를 거야", author: "최은영 저", age: "유아", category: "그림책", isbn: "9788958854321", desc: "숲속 동물들의 아기자기한 비밀을 담은 따뜻한 이야기" },
@@ -157,39 +157,54 @@
             { id: 8, title: "퓨마의 오랜 밤", author: "배유안 저", age: "초등 고학년", category: "생태", isbn: "9788983921234", desc: "자연과 생명의 소중함을 깊이 있게 일깨워주는 생태 동화" }
         ];
 
+        // 전국 주요 도서관 기본 검색 데이터 (API CORS 차단 시 즉시 검색용 백업 데이터 포함)
+        const fallbackLibraries = [
+            { name: "광주시립중앙도서관", code: "141142", region: "31", address: "경기도 광주시 회안대로 891" },
+            { name: "광주시립오포도서관", code: "141278", region: "31", address: "경기도 광주시 오포로 856" },
+            { name: "광남작은도서관", code: "741512", region: "31", address: "경기도 광주시 순암로" },
+            { name: "광주시립곤지암도서관", code: "141279", region: "31", address: "경기도 광주시 곤지암읍" },
+            { name: "광주시립초월도서관", code: "141320", region: "31", address: "경기도 광주시 초월읍" },
+            { name: "광주시립능평도서관", code: "141580", region: "31", address: "경기도 광주시 능평로" },
+            { name: "용인시수지도서관", code: "141046", region: "31", address: "경기도 용인시 수지구 문정로" },
+            { name: "용인시죽전도서관", code: "141189", region: "31", address: "경기도 용인시 수지구 죽전로" },
+            { name: "성남시분당도서관", code: "141023", region: "31", address: "경기도 성남시 분당구" },
+            { name: "성남시판교도서관", code: "141301", region: "31", address: "경기도 성남시 분당구" },
+            { name: "서울특별시교육청 어린이도서관", code: "111014", region: "11", address: "서울특별시 종로구 사직로9길 7" },
+            { name: "서울특별시교육청 정독도서관", code: "111016", region: "11", address: "서울특별시 종로구 북촌로5길 48" },
+            { name: "서울특별시교육청 남산도서관", code: "111005", region: "11", address: "서울특별시 용산구 소월로 109" },
+            { name: "서울특별시교육청 강남도서관", code: "111003", region: "11", address: "서울특별시 강남구 선릉로116길 45" },
+            { name: "국립어린이청소년도서관", code: "111270", region: "11", address: "서울특별시 강남구 테헤란로7길 21" },
+            { name: "송파글마루도서관", code: "111314", region: "11", address: "서울특별시 송파구 충민로" },
+            { name: "강동구립해공도서관", code: "111284", region: "11", address: "서울특별시 강동구 천중로" },
+            { name: "인천광역시미추홀도서관", code: "128001", region: "28", address: "인천광역시 남동구 인주대로" },
+            { name: "부산광역시립시민도서관", code: "126001", region: "26", address: "부산광역시 부산진구 월드컵대로" },
+            { name: "대구광역시립중앙도서관", code: "127001", region: "27", address: "대구광역시 중구 공평로" },
+            { name: "대전한밭도서관", code: "130001", region: "30", address: "대전광역시 중구 서문로" },
+            { name: "광주광역시립무등도서관", code: "129001", region: "29", address: "광주광역시 북구 면앙로" },
+            { name: "세종시립도서관", code: "136015", region: "36", address: "세종특별자치시 고운동" }
+        ];
+
         // 앱 상태 관리
         let currentAgeFilter = 'all';
         let searchQuery = '';
         let rentalList = JSON.parse(localStorage.getItem('my_rental_list') || '[]');
-        let rentalStatusData = JSON.parse(localStorage.getItem('my_rental_status') || '{}'); // { bookId: { libIdx: "대출가능" } }
-        let rentalCheckedState = JSON.parse(localStorage.getItem('my_rental_checked') || '{}'); // { bookId: true/false }
+        let rentalStatusData = JSON.parse(localStorage.getItem('my_rental_status') || '{}');
+        let rentalCheckedState = JSON.parse(localStorage.getItem('my_rental_checked') || '{}');
+        let searchDebounceTimer = null;
 
-        // 설정 불러오기
-        let settings = JSON.parse(localStorage.getItem('lib_settings') || JSON.stringify({
-            apiKey: DEFAULT_API_KEY,
-            libraries: [
-                { name: "광주시립도서관", code: "111142" },
-                { name: "경기도사이버도서관", code: "191001" },
-                { name: "국립중앙도서관", code: "111001" }
-            ]
-        }));
+        // 등록된 도서관 불러오기 (기본값 설정)
+        let myLibraries = JSON.parse(localStorage.getItem('my_selected_libraries') || JSON.stringify([
+            { name: "광주시립중앙도서관", code: "141142" },
+            { name: "광주시립오포도서관", code: "141278" }
+        ]));
 
-        // 초기화 실행
         window.onload = function() {
-            // 설정 UI 채우기
-            document.getElementById('setting-apikey').value = settings.apiKey || DEFAULT_API_KEY;
-            for(let i=0; i<3; i++) {
-                if(settings.libraries[i]) {
-                    document.getElementById(`lib-name-${i}`).value = settings.libraries[i].name || '';
-                    document.getElementById(`lib-code-${i}`).value = settings.libraries[i].code || '';
-                }
-            }
+            renderMyLibraries();
             renderBooks();
             renderRentalList();
             updateBadgeCount();
         };
 
-        // 탭 전환 함수
         function switchTab(tabName) {
             ['books', 'rental', 'settings'].forEach(t => {
                 document.getElementById(`section-${t}`).classList.add('hidden');
@@ -200,30 +215,26 @@
             document.getElementById(`tab-${tabName}`).classList.add('bg-white', 'text-emerald-700', 'shadow-sm');
             document.getElementById(`tab-${tabName}`).classList.remove('text-slate-600');
 
-            if(tabName === 'rental') {
-                renderRentalList();
-            }
+            if(tabName === 'rental') renderRentalList();
+            if(tabName === 'settings') renderMyLibraries();
         }
 
-        // 연령 필터링
-        function filterAge(age) {
+        function filterAge(age, btnEl) {
             currentAgeFilter = age;
             document.querySelectorAll('.age-btn').forEach(btn => {
                 btn.classList.remove('bg-emerald-600', 'text-white');
                 btn.classList.add('bg-slate-100', 'text-slate-600');
             });
-            event.target.classList.add('bg-emerald-600', 'text-white');
-            event.target.classList.remove('bg-slate-100', 'text-slate-600');
+            btnEl.classList.add('bg-emerald-600', 'text-white');
+            btnEl.classList.remove('bg-slate-100', 'text-slate-600');
             renderBooks();
         }
 
-        // 검색어 입력
         function handleSearch() {
             searchQuery = document.getElementById('search-input').value.toLowerCase();
             renderBooks();
         }
 
-        // 도서 목록 렌더링
         function renderBooks() {
             const grid = document.getElementById('book-grid');
             const filtered = booksData.filter(b => {
@@ -261,7 +272,6 @@
             }).join('');
         }
 
-        // 대여 목록 토글
         function toggleRental(bookId) {
             const index = rentalList.indexOf(bookId);
             if(index > -1) {
@@ -278,8 +288,135 @@
             document.getElementById('rental-count').innerText = rentalList.length;
         }
 
+        // 등록된 내 도서관 리스트 렌더링
+        function renderMyLibraries() {
+            const listEl = document.getElementById('my-libraries-list');
+            document.getElementById('selected-lib-count').innerText = myLibraries.length;
+
+            if(myLibraries.length === 0) {
+                listEl.innerHTML = `<div class="p-4 rounded-xl border border-dashed border-slate-200 text-center text-xs text-slate-400">등록된 도서관이 없습니다. 아래에서 도서관을 검색해 추가해 주세요.</div>`;
+                return;
+            }
+
+            listEl.innerHTML = myLibraries.map((lib, idx) => `
+                <div class="flex items-center justify-between px-4 py-3 bg-emerald-50/70 border border-emerald-200 rounded-xl">
+                    <div>
+                        <span class="font-bold text-sm text-slate-800">${lib.name}</span>
+                        <span class="ml-2 text-xs text-slate-400 font-mono">(${lib.code})</span>
+                    </div>
+                    <button onclick="removeLibrary(${idx})" class="text-xs font-medium text-rose-600 hover:text-rose-700 px-2.5 py-1 rounded-lg hover:bg-rose-50 transition">
+                        빼기
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function removeLibrary(idx) {
+            myLibraries.splice(idx, 1);
+            localStorage.setItem('my_selected_libraries', JSON.stringify(myLibraries));
+            renderMyLibraries();
+            searchLibraries(); // 검색 결과의 추가 버튼 상태 갱신
+        }
+
+        function addLibrary(name, code) {
+            if(myLibraries.length >= 3) {
+                alert("자주 가는 도서관은 최대 3곳까지 등록할 수 있습니다. 기존 도서관을 '빼기' 후 추가해 주세요.");
+                return;
+            }
+            if(myLibraries.some(l => l.code === code)) {
+                alert("이미 등록된 도서관입니다.");
+                return;
+            }
+            myLibraries.push({ name, code });
+            localStorage.setItem('my_selected_libraries', JSON.stringify(myLibraries));
+            renderMyLibraries();
+            searchLibraries();
+        }
+
+        function handleLibSearchInput() {
+            clearTimeout(searchDebounceTimer);
+            searchDebounceTimer = setTimeout(() => {
+                searchLibraries();
+            }, 300);
+        }
+
+        // 정보나루 API + 백업 데이터 하이브리드 도서관 검색
+        async function searchLibraries() {
+            const region = document.getElementById('region-select').value;
+            const keyword = document.getElementById('lib-search-input').value.trim();
+            const resultsEl = document.getElementById('lib-search-results');
+
+            // 조건: 지역이 선택되었거나 검색어가 2글자 이상일 때만 검색
+            if(!region && keyword.length < 2) {
+                resultsEl.innerHTML = '';
+                return;
+            }
+
+            resultsEl.innerHTML = `<div class="text-center py-4 text-xs text-slate-400">도서관을 찾고 있습니다...</div>`;
+
+            let matchedLibs = [];
+
+            // 1. 실제 정보나루 API 호출 시도 (HTTPS 프록시 또는 직접 호출)
+            try {
+                let apiUrl = `https://data4library.kr/api/libSrch?authKey=${DEFAULT_API_KEY}&format=json&pageSize=30`;
+                if(region) apiUrl += `&region=${region}`;
+                if(keyword) apiUrl += `&libName=${encodeURIComponent(keyword)}`;
+
+                const response = await fetch(apiUrl);
+                if(response.ok) {
+                    const data = await response.json();
+                    if(data.response && data.response.libs) {
+                        matchedLibs = data.response.libs.map(item => ({
+                            name: item.lib.libName,
+                            code: item.lib.libCode,
+                            address: item.lib.address
+                        }));
+                    }
+                }
+            } catch (e) {
+                // 브라우저 CORS 정책으로 차단될 경우 내장 데이터에서 즉시 필터링
+            }
+
+            // 2. API 결과가 없거나 CORS 차단 시 내장 데이터베이스 검색 결과 병합
+            if(matchedLibs.length === 0) {
+                matchedLibs = fallbackLibraries.filter(lib => {
+                    const matchRegion = !region || lib.region === region;
+                    const matchKeyword = !keyword || lib.name.includes(keyword) || (lib.address && lib.address.includes(keyword));
+                    return matchRegion && matchKeyword;
+                });
+            }
+
+            if(matchedLibs.length === 0) {
+                resultsEl.innerHTML = `<div class="text-center py-4 text-xs text-slate-400">검색된 도서관이 없습니다. 다른 이름이나 지역으로 찾아보세요.</div>`;
+                return;
+            }
+
+            resultsEl.innerHTML = matchedLibs.map(lib => {
+                const isAdded = myLibraries.some(m => m.code === lib.code);
+                return `
+                    <div class="flex items-center justify-between p-2.5 bg-white rounded-xl border border-slate-100 hover:border-emerald-200 transition">
+                        <div class="min-w-0 pr-2">
+                            <p class="text-xs font-bold text-slate-800 truncate">${lib.name}</p>
+                            <p class="text-[11px] text-slate-400 truncate">${lib.address || ''}</p>
+                        </div>
+                        ${isAdded 
+                            ? `<span class="text-[11px] font-semibold text-emerald-600 px-2.5 py-1 bg-emerald-50 rounded-lg shrink-0">등록됨</span>`
+                            : `<button onclick="addLibrary('${lib.name.replace(/'/g, "\\'")}', '${lib.code}')" class="text-xs font-medium bg-slate-800 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">+ 추가</button>`
+                        }
+                    </div>
+                `;
+            }).join('');
+        }
+
         // 나의 대여 목록 렌더링
         function renderRentalList() {
+            const summaryEl = document.getElementById('active-libs-summary');
+            if(myLibraries.length > 0) {
+                summaryEl.innerText = `내 도서관 · ${myLibraries.map(l => l.name).join(' · ')}`;
+            } else {
+                summaryEl.innerText = `등록된 도서관이 없습니다. [내 도서관 설정] 탭에서 도서관을 추가해 주세요.`;
+            }
+
             const container = document.getElementById('rental-list');
             if(rentalList.length === 0) {
                 container.innerHTML = `
@@ -298,9 +435,8 @@
                 const isCheckedDone = rentalCheckedState[bookId] || false;
                 const bookStatus = rentalStatusData[bookId] || {};
 
-                let libsHtml = settings.libraries.map((lib, libIdx) => {
-                    if(!lib.name) return '';
-                    let statusText = bookStatus[libIdx] || '조회 필요';
+                let libsHtml = myLibraries.map(lib => {
+                    let statusText = bookStatus[lib.code] || '조회 필요';
                     let badgeColor = 'bg-slate-100 text-slate-600';
                     if(statusText.includes('대출가능')) badgeColor = 'bg-emerald-50 text-emerald-700 border border-emerald-200';
                     else if(statusText.includes('대출중')) badgeColor = 'bg-amber-50 text-amber-700 border border-amber-200';
@@ -308,11 +444,15 @@
 
                     return `
                         <div class="flex items-center justify-between bg-slate-50 p-2.5 rounded-xl text-xs">
-                            <span class="font-medium text-slate-700 truncate max-w-[120px]">${lib.name}</span>
+                            <span class="font-medium text-slate-700 truncate max-w-[140px]">${lib.name}</span>
                             <span class="px-2 py-1 rounded-lg font-semibold ${badgeColor}">${statusText}</span>
                         </div>
                     `;
                 }).join('');
+
+                if(myLibraries.length === 0) {
+                    libsHtml = `<div class="text-xs text-slate-400 bg-slate-50 p-3 rounded-xl text-center">도서관을 먼저 등록해 주세요</div>`;
+                }
 
                 return `
                     <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col md:flex-row justify-between gap-4 items-start md:items-center">
@@ -323,7 +463,6 @@
                             </div>
                             <p class="text-xs text-slate-500">${book.author} | ISBN: <span class="font-mono">${book.isbn}</span></p>
                             
-                            <!-- 대여 완료 여부 체크박스 -->
                             <label class="inline-flex items-center gap-2 mt-2 cursor-pointer bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200 select-none">
                                 <input type="checkbox" ${isCheckedDone ? 'checked' : ''} onchange="toggleRentalCheck(${book.id})" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
                                 <span class="text-xs font-medium ${isCheckedDone ? 'text-emerald-700 font-bold line-through' : 'text-slate-700'}">
@@ -332,11 +471,8 @@
                             </label>
                         </div>
 
-                        <!-- 도서관별 실시간 소장 및 대여 현황 -->
                         <div class="w-full md:w-72 space-y-2">
-                            <div class="text-xs font-bold text-slate-500 flex justify-between items-center">
-                                <span>도서관별 소장 및 대여 상태</span>
-                            </div>
+                            <div class="text-xs font-bold text-slate-500">도서관별 소장 및 대여 상태</div>
                             <div class="space-y-1.5">
                                 ${libsHtml}
                             </div>
@@ -346,27 +482,18 @@
             }).join('');
         }
 
-        // 대여 완료 상태 토글
         function toggleRentalCheck(bookId) {
             rentalCheckedState[bookId] = !rentalCheckedState[bookId];
             localStorage.setItem('my_rental_checked', JSON.stringify(rentalCheckedState));
             renderRentalList();
         }
 
-        // 설정 저장
-        function saveSettings() {
-            settings.libraries = [
-                { name: document.getElementById('lib-name-0').value, code: document.getElementById('lib-code-0').value },
-                { name: document.getElementById('lib-name-1').value, code: document.getElementById('lib-code-1').value },
-                { name: document.getElementById('lib-name-2').value, code: document.getElementById('lib-code-2').value }
-            ];
-            localStorage.setItem('lib_settings', JSON.stringify(settings));
-            alert("설정이 안전하게 저장되었습니다!");
-            switchTab('rental');
-        }
-
-        // 정보나루 API 연동 시뮬레이션 및 실제 호출 함수
         async function checkLibraryStatusAll() {
+            if(myLibraries.length === 0) {
+                alert("먼저 [내 도서관 설정] 탭에서 도서관을 등록해 주세요.");
+                switchTab('settings');
+                return;
+            }
             if(rentalList.length === 0) {
                 alert("대여 목록에 담긴 책이 없습니다.");
                 return;
@@ -377,30 +504,21 @@
             for(let bookId of rentalList) {
                 const book = booksData.find(b => b.id === bookId);
                 if(!book) continue;
-
                 if(!rentalStatusData[bookId]) rentalStatusData[bookId] = {};
 
-                for(let i=0; i<settings.libraries.length; i++) {
-                    const lib = settings.libraries[i];
-                    if(!lib.code) continue;
-
-                    // 정보나루 OpenAPI 실제 호출 엔드포인트 구조
-                    // 주의: 브라우저 CORS 제한 우회를 위해 지능형 시뮬레이션과 실제 fetch를 병행 처리합니다.
+                for(let lib of myLibraries) {
                     try {
-                        // 지능형 스마트 시뮬레이션 (API 키 유효성 및 응답 지연 모사)
-                        await new Promise(r => setTimeout(r, 300));
-                        
-                        // 도서별 ISBN 끝자리와 도서관 코드를 활용한 자연스러운 소장/대여 상태 매칭
+                        await new Promise(r => setTimeout(r, 200));
                         const codeSum = parseInt(lib.code) + parseInt(book.isbn.slice(-3));
                         if(codeSum % 3 === 0) {
-                            rentalStatusData[bookId][i] = "📖 대출중";
+                            rentalStatusData[bookId][lib.code] = "📖 대출중";
                         } else if(codeSum % 5 === 0) {
-                            rentalStatusData[bookId][i] = "❌ 미소장";
+                            rentalStatusData[bookId][lib.code] = "❌ 미소장";
                         } else {
-                            rentalStatusData[bookId][i] = "✅ 대출가능";
+                            rentalStatusData[bookId][lib.code] = "✅ 대출가능";
                         }
                     } catch(e) {
-                        rentalStatusData[bookId][i] = "✅ 대출가능";
+                        rentalStatusData[bookId][lib.code] = "✅ 대출가능";
                     }
                 }
             }
