@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>우리아이 도서관 나들이 & 대여 관리</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 엑셀(xlsx, xls, csv) 파싱을 위한 SheetJS 라이브러리 -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Pretendard', sans-serif; }
@@ -20,10 +22,11 @@
                 <h1 class="text-xl font-bold text-emerald-800">우리아이 도서관 대여 매니저</h1>
             </div>
             <!-- 탭 네비게이션 -->
-            <nav class="flex bg-slate-100 p-1 rounded-xl text-sm font-medium">
-                <button onclick="switchTab('books')" id="tab-books" class="px-4 py-2 rounded-lg transition bg-white text-emerald-700 shadow-sm">추천 도서 목록</button>
-                <button onclick="switchTab('rental')" id="tab-rental" class="px-4 py-2 rounded-lg transition text-slate-600">나의 대여 목록 (<span id="rental-count">0</span>)</button>
-                <button onclick="switchTab('settings')" id="tab-settings" class="px-4 py-2 rounded-lg transition text-slate-600">내 도서관 설정</button>
+            <nav class="flex flex-wrap justify-center bg-slate-100 p-1 rounded-xl text-xs sm:text-sm font-medium gap-1">
+                <button onclick="switchTab('books')" id="tab-books" class="px-3 sm:px-4 py-2 rounded-lg transition bg-white text-emerald-700 shadow-sm">추천 도서 목록</button>
+                <button onclick="switchTab('rental')" id="tab-rental" class="px-3 sm:px-4 py-2 rounded-lg transition text-slate-600">나의 대여 목록 (<span id="rental-count">0</span>)</button>
+                <button onclick="switchTab('settings')" id="tab-settings" class="px-3 sm:px-4 py-2 rounded-lg transition text-slate-600">내 도서관 설정</button>
+                <button onclick="switchTab('admin')" id="tab-admin" class="px-3 sm:px-4 py-2 rounded-lg transition text-slate-500 hover:text-slate-800">🔒 관리자</button>
             </nav>
         </div>
     </header>
@@ -132,6 +135,123 @@
             </div>
         </section>
 
+        <!-- 4. 관리자 메뉴 탭 -->
+        <section id="section-admin" class="space-y-6 hidden">
+            
+            <!-- 비밀번호 로그인 화면 -->
+            <div id="admin-login-box" class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 max-w-md mx-auto text-center space-y-4">
+                <div class="w-12 h-12 bg-emerald-50 text-emerald-700 rounded-full flex items-center justify-center mx-auto text-xl">🔐</div>
+                <div>
+                    <h2 class="text-lg font-bold text-slate-800">관리자 전용 메뉴</h2>
+                    <p class="text-xs text-slate-500 mt-1">추천도서 엑셀 업로드 및 통계를 관리하려면 비밀번호를 입력하세요.</p>
+                </div>
+                <div class="space-y-3 pt-2">
+                    <input type="password" id="admin-pw-input" onkeydown="if(event.key==='Enter') checkAdminPassword()" placeholder="비밀번호 입력 (초기값: 1234)" class="w-full px-4 py-2.5 text-sm text-center rounded-xl border border-slate-200 focus:outline-none focus:border-emerald-500">
+                    <button onclick="checkAdminPassword()" class="w-full py-2.5 bg-slate-800 hover:bg-emerald-700 text-white text-sm font-medium rounded-xl transition">
+                        관리자 로그인
+                    </button>
+                </div>
+            </div>
+
+            <!-- 관리자 대시보드 (로그인 성공 시 표시) -->
+            <div id="admin-dashboard" class="hidden space-y-6">
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                    <div>
+                        <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[11px] font-bold rounded-md">ADMIN MODE</span>
+                        <h2 class="text-lg font-bold text-slate-800 mt-1">관리자 대시보드</h2>
+                    </div>
+                    <!-- 관리자 서브 메뉴 (엑셀 관리 / 통계) -->
+                    <div class="flex bg-slate-100 p-1 rounded-xl text-xs font-semibold">
+                        <button onclick="switchAdminSubTab('excel')" id="subtab-excel" class="px-3.5 py-2 rounded-lg bg-white text-emerald-700 shadow-sm transition">📊 추천도서 엑셀 관리</button>
+                        <button onclick="switchAdminSubTab('stats')" id="subtab-stats" class="px-3.5 py-2 rounded-lg text-slate-600 transition">📈 통계 현황 (준비중)</button>
+                    </div>
+                </div>
+
+                <!-- 서브탭 1: 추천도서 엑셀 업로드 및 관리 -->
+                <div id="admin-sub-excel" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-100 pb-4">
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-base">엑셀 파일로 추천도서 일괄 등록</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">엑셀(.xlsx, .xls, .csv)을 업로드하면 추천도서 목록이 즉시 갱신됩니다.</p>
+                        </div>
+                        <button onclick="downloadSampleExcel()" class="px-3.5 py-2 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 text-xs font-semibold rounded-xl transition shrink-0">
+                            📥 샘플 엑셀 양식 다운로드
+                        </button>
+                    </div>
+
+                    <!-- 엑셀 컬럼 안내 -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/80 text-xs space-y-2">
+                        <p class="font-bold text-slate-700">📌 엑셀 첫 번째 행(제목줄) 필수 항목 안내</p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-slate-600">
+                            <span class="bg-white px-2.5 py-1 rounded border border-slate-200"><strong>도서명</strong> (필수)</span>
+                            <span class="bg-white px-2.5 py-1 rounded border border-slate-200"><strong>저자</strong></span>
+                            <span class="bg-white px-2.5 py-1 rounded border border-slate-200"><strong>권장연령</strong> (유아/초등 저학년/초등 고학년)</span>
+                            <span class="bg-white px-2.5 py-1 rounded border border-slate-200"><strong>카테고리</strong></span>
+                            <span class="bg-white px-2.5 py-1 rounded border border-slate-200"><strong>출처기관</strong></span>
+                            <span class="bg-white px-2.5 py-1 rounded border border-slate-200"><strong>청구기호</strong></span>
+                            <span class="bg-white px-2.5 py-1 rounded border border-slate-200"><strong>ISBN</strong> (13자리)</span>
+                            <span class="bg-white px-2.5 py-1 rounded border border-slate-200"><strong>설명</strong></span>
+                        </div>
+                    </div>
+
+                    <!-- 업로드 방식 선택 & 파일 인풋 -->
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4 text-xs font-medium text-slate-700">
+                            <label class="flex items-center gap-1.5 cursor-pointer">
+                                <input type="radio" name="upload-mode" value="replace" checked class="text-emerald-600 focus:ring-emerald-500">
+                                <span>기존 목록 전체 교체</span>
+                            </label>
+                            <label class="flex items-center gap-1.5 cursor-pointer">
+                                <input type="radio" name="upload-mode" value="append" class="text-emerald-600 focus:ring-emerald-500">
+                                <span>기존 목록 아래에 추가</span>
+                            </label>
+                        </div>
+
+                        <label class="flex flex-col items-center justify-center w-full h-36 border-2 border-dashed border-emerald-300 rounded-2xl cursor-pointer bg-emerald-50/40 hover:bg-emerald-50 transition">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6 text-center px-4">
+                                <span class="text-3xl mb-2">📂</span>
+                                <p class="text-sm font-semibold text-emerald-800">클릭하여 엑셀 파일(.xlsx, .xls, .csv) 선택</p>
+                                <p class="text-xs text-slate-500 mt-1">파일 선택 즉시 자동으로 도서 목록에 반영됩니다.</p>
+                            </div>
+                            <input type="file" id="excel-file-input" accept=".xlsx, .xls, .csv" onchange="handleExcelUpload(event)" class="hidden" />
+                        </label>
+                    </div>
+
+                    <!-- 현재 등록된 도서 수 및 초기화 / 배포용 다운로드 -->
+                    <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-3">
+                        <p class="text-xs text-slate-600">현재 등록된 추천도서: <strong class="text-emerald-700 text-sm" id="admin-book-count">0</strong>권</p>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="resetBooksToDefault()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-medium rounded-xl transition">
+                                기본 샘플로 초기화
+                            </button>
+                            <button onclick="exportUpdatedHtml()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-xl transition shadow-sm">
+                                🌐 모든 사용자 공유용 index.html 저장
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 서브탭 2: 통계 화면 (추후 확장용 기본 요약 포함) -->
+                <div id="admin-sub-stats" class="hidden bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-6">
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-base">📈 도서 및 대여 통계</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">현재 등록된 추천도서 분포와 나의 대여 현황 요약입니다. (추후 상세 차트 확장 가능)</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="stats-cards">
+                        <!-- 자바스크립트로 동적 통계 요약 생성 -->
+                    </div>
+
+                    <div class="p-6 bg-slate-50 rounded-2xl border border-dashed border-slate-200 text-center space-y-1.5">
+                        <span class="text-2xl">📊</span>
+                        <p class="text-sm font-semibold text-slate-700">상세 통계 리포트 확장 영역</p>
+                        <p class="text-xs text-slate-400">원하시는 통계 항목(월별 대여 추이, 인기 도서 순위, 연령별 대출 비율 등)을 말씀해 주시면 이곳에 차트를 추가해 드립니다.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
     </main>
 
     <!-- 푸터 -->
@@ -142,9 +262,10 @@
     <!-- 자바스크립트 로직 -->
     <script>
         const DEFAULT_API_KEY = "81211fd9d9c07fe4a8af9ff8be7fc84551f8e839bf8072cb907902e579114fea";
+        const ADMIN_PASSWORD = "1234"; // 관리자 비밀번호 (원하는 비밀번호로 변경 가능)
 
-        // 추천 도서 데이터 (출처기관 및 청구기호 추가)
-        const booksData = [
+        // 기본 샘플 도서 데이터
+        const initialBooksData = [
             { id: 1, title: "낙엽 스낵", author: "이랑 저", age: "유아", category: "그림책", source: "서울시교육청 공공도서관", callNo: "유 813.8-이292ㄴ", isbn: "9791158363567", desc: "바삭바삭 맛있는 낙엽으로 상상력을 펼치는 가을 그림책" },
             { id: 2, title: "다람쥐는 모를 거야", author: "최은영 저", age: "유아", category: "그림책", source: "국립어린이청소년도서관", callNo: "유 813.8-최68ㄷ", isbn: "9788958854321", desc: "숲속 동물들의 아기자기한 비밀을 담은 따뜻한 이야기" },
             { id: 3, title: "할머니와 가을 수확", author: "김영진 저", age: "유아", category: "생활동화", source: "서울시교육청 어린이도서관", callNo: "유 813.8-김64ㅎ", isbn: "9788936454890", desc: "시골 할머니 댁에서 고구마를 캐며 느끼는 가족의 사랑" },
@@ -155,7 +276,10 @@
             { id: 8, title: "퓨마의 오랜 밤", author: "배유안 저", age: "초등 고학년", category: "생태", source: "국립어린이청소년도서관", callNo: "아 813.8-배66ㅍ", isbn: "9788983921234", desc: "자연과 생명의 소중함을 깊이 있게 일깨워주는 생태 동화" }
         ];
 
-        // 오프라인/백업용 도서관 목록
+        // 로컬 저장소에 엑셀로 올린 도서가 있으면 그것을 우선 사용
+        let booksData = JSON.parse(localStorage.getItem('custom_books_data') || 'null') || [...initialBooksData];
+
+        // 백업용 도서관 목록
         const fallbackLibraries = [
             { name: "광주시립중앙도서관", code: "141142", region: "31", address: "경기도 광주시 회안대로 891" },
             { name: "광주시립오포도서관", code: "141278", region: "31", address: "경기도 광주시 오포로 856" },
@@ -185,6 +309,7 @@
         let rentalStatusData = JSON.parse(localStorage.getItem('my_rental_status') || '{}');
         let rentalCheckedState = JSON.parse(localStorage.getItem('my_rental_checked') || '{}');
         let searchDebounceTimer = null;
+        let isAdminLoggedIn = false;
 
         let myLibraries = JSON.parse(localStorage.getItem('my_selected_libraries') || JSON.stringify([
             { name: "광주시립중앙도서관", code: "141142" },
@@ -196,10 +321,11 @@
             renderBooks();
             renderRentalList();
             updateBadgeCount();
+            updateAdminBookCount();
         };
 
         function switchTab(tabName) {
-            ['books', 'rental', 'settings'].forEach(t => {
+            ['books', 'rental', 'settings', 'admin'].forEach(t => {
                 document.getElementById(`section-${t}`).classList.add('hidden');
                 document.getElementById(`tab-${t}`).classList.remove('bg-white', 'text-emerald-700', 'shadow-sm');
                 document.getElementById(`tab-${t}`).classList.add('text-slate-600');
@@ -210,8 +336,199 @@
 
             if(tabName === 'rental') renderRentalList();
             if(tabName === 'settings') renderMyLibraries();
+            if(tabName === 'admin') {
+                updateAdminBookCount();
+                renderStatsSummary();
+            }
         }
 
+        // ================= 관리자 메뉴 로직 =================
+        function checkAdminPassword() {
+            const inputPw = document.getElementById('admin-pw-input').value;
+            if(inputPw === ADMIN_PASSWORD) {
+                isAdminLoggedIn = true;
+                document.getElementById('admin-login-box').classList.add('hidden');
+                document.getElementById('admin-dashboard').classList.remove('hidden');
+                updateAdminBookCount();
+                renderStatsSummary();
+            } else {
+                alert("비밀번호가 일치하지 않습니다.");
+                document.getElementById('admin-pw-input').value = '';
+            }
+        }
+
+        function switchAdminSubTab(sub) {
+            ['excel', 'stats'].forEach(s => {
+                document.getElementById(`admin-sub-${s}`).classList.add('hidden');
+                document.getElementById(`subtab-${s}`).classList.remove('bg-white', 'text-emerald-700', 'shadow-sm');
+                document.getElementById(`subtab-${s}`).classList.add('text-slate-600');
+            });
+            document.getElementById(`admin-sub-${sub}`).classList.remove('hidden');
+            document.getElementById(`subtab-${sub}`).classList.add('bg-white', 'text-emerald-700', 'shadow-sm');
+            document.getElementById(`subtab-${sub}`).classList.remove('text-slate-600');
+            if(sub === 'stats') renderStatsSummary();
+        }
+
+        function updateAdminBookCount() {
+            const el = document.getElementById('admin-book-count');
+            if(el) el.innerText = booksData.length;
+        }
+
+        // 샘플 엑셀 다운로드
+        function downloadSampleExcel() {
+            const sampleRows = [
+                {
+                    "도서명": "수박 수영장",
+                    "저자": "안녕달 저",
+                    "권장연령": "유아",
+                    "카테고리": "그림책",
+                    "출처기관": "서울시교육청 공공도서관",
+                    "청구기호": "유 813.8-안192ㅅ",
+                    "ISBN": "9788936454807",
+                    "설명": "커다란 수박 속에서 온 마을 사람들이 함께 즐기는 시원한 여름 이야기"
+                },
+                {
+                    "도서명": "만복이네 떡집",
+                    "저자": "김리리 저",
+                    "권장연령": "초등 저학년",
+                    "카테고리": "창작동화",
+                    "출처기관": "국립어린이청소년도서관",
+                    "청구기호": "아 813.8-김297ㅁ",
+                    "ISBN": "9788949161341",
+                    "설명": "신비한 떡집에서 벌어지는 따뜻하고 유쾌한 마음 성장 동화"
+                }
+            ];
+            const ws = XLSX.utils.json_to_sheet(sampleRows);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "추천도서목록");
+            XLSX.writeFile(wb, "추천도서_업로드_샘플양식.xlsx");
+        }
+
+        // 엑셀 파일 업로드 처리
+        function handleExcelUpload(event) {
+            const file = event.target.files[0];
+            if(!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+                    const firstSheetName = workbook.SheetNames[0];
+                    const worksheet = workbook.Sheets[firstSheetName];
+                    const jsonRows = XLSX.utils.sheet_to_json(worksheet);
+
+                    if(jsonRows.length === 0) {
+                        alert("엑셀 파일에 데이터가 없습니다.");
+                        return;
+                    }
+
+                    const mode = document.querySelector('input[name="upload-mode"]:checked').value;
+                    let startId = mode === 'append' ? (booksData.reduce((max, b) => Math.max(max, b.id), 0) + 1) : 1;
+
+                    const parsedBooks = jsonRows.map((row, idx) => {
+                        const title = row['도서명'] || row['제목'] || row['title'] || '';
+                        if(!title) return null;
+
+                        // 연령 표기 정규화
+                        let rawAge = String(row['권장연령'] || row['연령'] || '유아').trim();
+                        let age = '유아';
+                        if(rawAge.includes('고학년')) age = '초등 고학년';
+                        else if(rawAge.includes('저학년') || rawAge.includes('초등')) age = '초등 저학년';
+
+                        return {
+                            id: startId + idx,
+                            title: String(title).trim(),
+                            author: String(row['저자'] || row['작가'] || '저자 미상').trim(),
+                            age: age,
+                            category: String(row['카테고리'] || row['분류'] || '추천도서').trim(),
+                            source: String(row['출처기관'] || row['추천기관'] || '사서추천도서').trim(),
+                            callNo: String(row['청구기호'] || '청구기호 미상').trim(),
+                            isbn: String(row['ISBN'] || row['isbn'] || '').replace(/[^0-9]/g, ''),
+                            desc: String(row['설명'] || row['소개'] || '사서가 추천하는 유익한 도서입니다.').trim()
+                        };
+                    }).filter(Boolean);
+
+                    if(parsedBooks.length === 0) {
+                        alert("유효한 '도서명' 열을 찾지 못했습니다. 샘플 엑셀 양식을 확인해 주세요.");
+                        return;
+                    }
+
+                    if(mode === 'replace') {
+                        booksData = parsedBooks;
+                    } else {
+                        booksData = [...booksData, ...parsedBooks];
+                    }
+
+                    localStorage.setItem('custom_books_data', JSON.stringify(booksData));
+                    updateAdminBookCount();
+                    renderBooks();
+                    renderStatsSummary();
+                    alert(`총 ${parsedBooks.length}권의 추천도서가 성공적으로 반영되었습니다!`);
+                } catch(err) {
+                    alert("엑셀 파일을 읽는 중 오류가 발생했습니다. 올바른 엑셀(.xlsx, .xls, .csv) 파일인지 확인해 주세요.");
+                } finally {
+                    event.target.value = '';
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        function resetBooksToDefault() {
+            if(!confirm("업로드한 목록을 지우고 초기 기본 샘플 도서 8권으로 되돌릴까요?")) return;
+            booksData = [...initialBooksData];
+            localStorage.removeItem('custom_books_data');
+            updateAdminBookCount();
+            renderBooks();
+            renderStatsSummary();
+            alert("초기 기본 목록으로 복원되었습니다.");
+        }
+
+        // 엑셀로 업로드된 데이터가 코드 안에 영구 반영된 index.html 파일 다운로드
+        function exportUpdatedHtml() {
+            const currentHtml = document.documentElement.outerHTML;
+            const serializedBooks = JSON.stringify(booksData, null, 12);
+            const updatedHtml = "<!DOCTYPE html>\n" + currentHtml.replace(
+                /const initialBooksData = \[[\s\S]*?\];/,
+                `const initialBooksData = ${serializedBooks};`
+            );
+            const blob = new Blob([updatedHtml], { type: "text/html;charset=utf-8" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "index.html";
+            link.click();
+            alert("방금 올리신 엑셀 도서가 반영된 새 index.html 파일이 다운로드되었습니다. 이 파일을 깃허브에 올리시면 다른 사용자들에게도 똑같이 보입니다!");
+        }
+
+        function renderStatsSummary() {
+            const statsEl = document.getElementById('stats-cards');
+            if(!statsEl) return;
+            const totalBooks = booksData.length;
+            const infantCnt = booksData.filter(b => b.age === '유아').length;
+            const lowElemCnt = booksData.filter(b => b.age === '초등 저학년').length;
+            const highElemCnt = booksData.filter(b => b.age === '초등 고학년').length;
+
+            statsEl.innerHTML = `
+                <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 text-center">
+                    <p class="text-xs text-slate-500">전체 추천도서</p>
+                    <p class="text-xl font-bold text-slate-800 mt-1">${totalBooks}권</p>
+                </div>
+                <div class="p-4 bg-emerald-50/70 rounded-xl border border-emerald-100 text-center">
+                    <p class="text-xs text-emerald-700">유아 도서</p>
+                    <p class="text-xl font-bold text-emerald-800 mt-1">${infantCnt}권</p>
+                </div>
+                <div class="p-4 bg-amber-50/70 rounded-xl border border-amber-100 text-center">
+                    <p class="text-xs text-amber-700">초등 저학년</p>
+                    <p class="text-xl font-bold text-amber-800 mt-1">${lowElemCnt}권</p>
+                </div>
+                <div class="p-4 bg-sky-50/70 rounded-xl border border-sky-100 text-center">
+                    <p class="text-xs text-sky-700">초등 고학년</p>
+                    <p class="text-xl font-bold text-sky-800 mt-1">${highElemCnt}권</p>
+                </div>
+            `;
+        }
+
+        // ================= 기존 도서 및 도서관 조회 로직 =================
         function filterAge(age, btnEl) {
             currentAgeFilter = age;
             document.querySelectorAll('.age-btn').forEach(btn => {
@@ -259,7 +576,7 @@
                             <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg mb-2.5 font-mono">
                                 <span><strong class="text-slate-700 font-sans">청구기호:</strong> ${book.callNo}</span>
                                 <span class="text-slate-300">|</span>
-                                <span class="text-slate-400">ISBN: ${book.isbn}</span>
+                                <span class="text-slate-400">ISBN: ${book.isbn || '-'}</span>
                             </div>
 
                             <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">${book.desc}</p>
@@ -411,7 +728,6 @@
             }).join('');
         }
 
-        // 나의 대여 목록 렌더링 ("대여예정" / "완료" 적용 및 청구기호·출처기관 표시)
         function renderRentalList() {
             const summaryEl = document.getElementById('active-libs-summary');
             if(myLibraries.length > 0) {
@@ -467,7 +783,6 @@
                             <h3 class="font-bold text-slate-800 text-base">${book.title}</h3>
                             <p class="text-xs text-slate-500">${book.author} | 청구기호: <span class="font-mono font-semibold text-slate-700">${book.callNo}</span></p>
                             
-                            <!-- 대여 상태 체크박스 ("대여예정" / "완료") -->
                             <label class="inline-flex items-center gap-2 mt-2 cursor-pointer px-3 py-1.5 rounded-xl border transition select-none ${isCheckedDone ? 'bg-emerald-50 border-emerald-200' : 'bg-slate-50 border-slate-200'}">
                                 <input type="checkbox" ${isCheckedDone ? 'checked' : ''} onchange="toggleRentalCheck(${book.id})" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
                                 <span class="text-xs font-bold ${isCheckedDone ? 'text-emerald-700' : 'text-slate-600'}">
@@ -532,8 +847,8 @@
                         }
                     } catch(e) {}
 
-                    if(!fetched) {
-                        const codeSum = parseInt(lib.code) + parseInt(book.isbn.slice(-3));
+                    if(!fetched && book.isbn) {
+                        const codeSum = parseInt(lib.code) + parseInt(book.isbn.slice(-3) || '0');
                         if(codeSum % 3 === 0) rentalStatusData[bookId][lib.code] = "📖 대출중";
                         else if(codeSum % 5 === 0) rentalStatusData[bookId][lib.code] = "❌ 미소장";
                         else rentalStatusData[bookId][lib.code] = "✅ 대출가능";
