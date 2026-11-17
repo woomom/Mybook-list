@@ -1,17 +1,16 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
+<html lang="ko"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>우리아이 도서관 나들이 & 대여 관리</title>
+    <title>우리아이 도서관 나들이 &amp; 대여 관리</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- 엑셀(xlsx, xls, csv) 파싱을 위한 SheetJS 라이브러리 -->
     <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Pretendard', sans-serif; }
     </style>
-</head>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.relative{position:relative}.sticky{position:sticky}.top-0{top:0px}.z-30{z-index:30}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:0.25rem}.mb-2{margin-bottom:0.5rem}.mr-1{margin-right:0.25rem}.mt-0\.5{margin-top:0.125rem}.mt-1{margin-top:0.25rem}.mt-auto{margin-top:auto}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mt-2{margin-top:0.5rem}.line-clamp-2{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-12{height:3rem}.h-36{height:9rem}.h-28{height:7rem}.h-4{height:1rem}.h-full{height:100%}.max-h-64{max-height:16rem}.min-h-screen{min-height:100vh}.w-12{width:3rem}.w-full{width:100%}.w-20{width:5rem}.w-4{width:1rem}.min-w-0{min-width:0px}.max-w-4xl{max-width:56rem}.max-w-md{max-width:28rem}.max-w-xl{max-width:36rem}.max-w-\[140px\]{max-width:140px}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.cursor-pointer{cursor:pointer}.select-none{-webkit-user-select:none;user-select:none}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:0.25rem}.gap-1\.5{gap:0.375rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-3\.5{gap:0.875rem}.space-y-1\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.375rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.375rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-2\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.625rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.625rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rounded{border-radius:0.25rem}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-md{border-radius:0.375rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-2{border-width:2px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-dashed{border-style:dashed}.border-amber-100{--tw-border-opacity:1;border-color:rgb(254 243 199 / var(--tw-border-opacity, 1))}.border-amber-200{--tw-border-opacity:1;border-color:rgb(253 230 138 / var(--tw-border-opacity, 1))}.border-amber-400\/80{border-color:rgb(251 191 36 / 0.8)}.border-emerald-200{--tw-border-opacity:1;border-color:rgb(167 243 208 / var(--tw-border-opacity, 1))}.border-emerald-300{--tw-border-opacity:1;border-color:rgb(110 231 183 / var(--tw-border-opacity, 1))}.border-slate-100{--tw-border-opacity:1;border-color:rgb(241 245 249 / var(--tw-border-opacity, 1))}.border-slate-200{--tw-border-opacity:1;border-color:rgb(226 232 240 / var(--tw-border-opacity, 1))}.border-slate-200\/80{border-color:rgb(226 232 240 / 0.8)}.border-amber-200\/70{border-color:rgb(253 230 138 / 0.7)}.border-sky-200\/70{border-color:rgb(186 230 253 / 0.7)}.border-emerald-100{--tw-border-opacity:1;border-color:rgb(209 250 229 / var(--tw-border-opacity, 1))}.border-sky-100{--tw-border-opacity:1;border-color:rgb(224 242 254 / var(--tw-border-opacity, 1))}.bg-amber-50{--tw-bg-opacity:1;background-color:rgb(255 251 235 / var(--tw-bg-opacity, 1))}.bg-amber-50\/50{background-color:rgb(255 251 235 / 0.5)}.bg-emerald-100{--tw-bg-opacity:1;background-color:rgb(209 250 229 / var(--tw-bg-opacity, 1))}.bg-emerald-50{--tw-bg-opacity:1;background-color:rgb(236 253 245 / var(--tw-bg-opacity, 1))}.bg-emerald-50\/40{background-color:rgb(236 253 245 / 0.4)}.bg-emerald-600{--tw-bg-opacity:1;background-color:rgb(5 150 105 / var(--tw-bg-opacity, 1))}.bg-slate-100{--tw-bg-opacity:1;background-color:rgb(241 245 249 / var(--tw-bg-opacity, 1))}.bg-slate-50{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1))}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-emerald-50\/70{background-color:rgb(236 253 245 / 0.7)}.bg-sky-50{--tw-bg-opacity:1;background-color:rgb(240 249 255 / var(--tw-bg-opacity, 1))}.bg-slate-100\/80{background-color:rgb(241 245 249 / 0.8)}.bg-amber-50\/70{background-color:rgb(255 251 235 / 0.7)}.bg-sky-50\/70{background-color:rgb(240 249 255 / 0.7)}.bg-gradient-to-br{background-image:linear-gradient(to bottom right, var(--tw-gradient-stops))}.from-emerald-50{--tw-gradient-from:#ecfdf5 var(--tw-gradient-from-position);--tw-gradient-to:rgb(236 253 245 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.to-amber-50{--tw-gradient-to:#fffbeb var(--tw-gradient-to-position)}.object-cover{object-fit:cover}.p-1{padding:0.25rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.p-2{padding:0.5rem}.p-2\.5{padding:0.625rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-3\.5{padding-left:0.875rem;padding-right:0.875rem}.px-4{padding-left:1rem;padding-right:1rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.pb-4{padding-bottom:1rem}.pb-6{padding-bottom:1.5rem}.pt-1{padding-top:0.25rem}.pt-2{padding-top:0.5rem}.pt-2\.5{padding-top:0.625rem}.pt-4{padding-top:1rem}.pt-5{padding-top:1.25rem}.text-center{text-align:center}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.font-sans{font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-\[11px\]{font-size:11px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.text-\[10px\]{font-size:10px}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.text-amber-800{--tw-text-opacity:1;color:rgb(146 64 14 / var(--tw-text-opacity, 1))}.text-emerald-600{--tw-text-opacity:1;color:rgb(5 150 105 / var(--tw-text-opacity, 1))}.text-emerald-700{--tw-text-opacity:1;color:rgb(4 120 87 / var(--tw-text-opacity, 1))}.text-emerald-800{--tw-text-opacity:1;color:rgb(6 95 70 / var(--tw-text-opacity, 1))}.text-emerald-900{--tw-text-opacity:1;color:rgb(6 78 59 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.text-slate-700{--tw-text-opacity:1;color:rgb(51 65 85 / var(--tw-text-opacity, 1))}.text-slate-800{--tw-text-opacity:1;color:rgb(30 41 59 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-rose-600{--tw-text-opacity:1;color:rgb(225 29 72 / var(--tw-text-opacity, 1))}.text-sky-700{--tw-text-opacity:1;color:rgb(3 105 161 / var(--tw-text-opacity, 1))}.text-amber-700{--tw-text-opacity:1;color:rgb(180 83 9 / var(--tw-text-opacity, 1))}.text-sky-800{--tw-text-opacity:1;color:rgb(7 89 133 / var(--tw-text-opacity, 1))}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.hover\:border-emerald-200:hover{--tw-border-opacity:1;border-color:rgb(167 243 208 / var(--tw-border-opacity, 1))}.hover\:bg-amber-100:hover{--tw-bg-opacity:1;background-color:rgb(254 243 199 / var(--tw-bg-opacity, 1))}.hover\:bg-emerald-50:hover{--tw-bg-opacity:1;background-color:rgb(236 253 245 / var(--tw-bg-opacity, 1))}.hover\:bg-emerald-700:hover{--tw-bg-opacity:1;background-color:rgb(4 120 87 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-200:hover{--tw-bg-opacity:1;background-color:rgb(226 232 240 / var(--tw-bg-opacity, 1))}.hover\:bg-rose-50:hover{--tw-bg-opacity:1;background-color:rgb(255 241 242 / var(--tw-bg-opacity, 1))}.hover\:text-slate-800:hover{--tw-text-opacity:1;color:rgb(30 41 59 / var(--tw-text-opacity, 1))}.hover\:text-rose-700:hover{--tw-text-opacity:1;color:rgb(190 18 60 / var(--tw-text-opacity, 1))}.focus\:border-emerald-500:focus{--tw-border-opacity:1;border-color:rgb(16 185 129 / var(--tw-border-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-emerald-500:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(16 185 129 / var(--tw-ring-opacity, 1))}@media (min-width: 640px){.sm\:w-64{width:16rem}.sm\:w-auto{width:auto}.sm\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.sm\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.sm\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.sm\:flex-row{flex-direction:row}.sm\:items-center{align-items:center}.sm\:px-4{padding-left:1rem;padding-right:1rem}.sm\:text-sm{font-size:0.875rem;line-height:1.25rem}}@media (min-width: 768px){.md\:w-72{width:18rem}.md\:flex-row{flex-direction:row}.md\:items-center{align-items:center}}</style></head>
 <body class="bg-amber-50/50 text-slate-800 min-h-screen flex flex-col">
 
     <!-- 상단 헤더 -->
@@ -23,10 +22,10 @@
             </div>
             <!-- 탭 네비게이션 -->
             <nav class="flex flex-wrap justify-center bg-slate-100 p-1 rounded-xl text-xs sm:text-sm font-medium gap-1">
-                <button onclick="switchTab('books')" id="tab-books" class="px-3 sm:px-4 py-2 rounded-lg transition bg-white text-emerald-700 shadow-sm">추천 도서 목록</button>
-                <button onclick="switchTab('rental')" id="tab-rental" class="px-3 sm:px-4 py-2 rounded-lg transition text-slate-600">나의 대여 목록 (<span id="rental-count">0</span>)</button>
+                <button onclick="switchTab('books')" id="tab-books" class="px-3 sm:px-4 py-2 rounded-lg transition text-slate-600">추천 도서 목록</button>
+                <button onclick="switchTab('rental')" id="tab-rental" class="px-3 sm:px-4 py-2 rounded-lg transition text-slate-600">나의 대여 목록 (<span id="rental-count">2</span>)</button>
                 <button onclick="switchTab('settings')" id="tab-settings" class="px-3 sm:px-4 py-2 rounded-lg transition text-slate-600">내 도서관 설정</button>
-                <button onclick="switchTab('admin')" id="tab-admin" class="px-3 sm:px-4 py-2 rounded-lg transition text-slate-500 hover:text-slate-800">🔒 관리자</button>
+                <button onclick="switchTab('admin')" id="tab-admin" class="px-3 sm:px-4 py-2 rounded-lg transition text-slate-500 hover:text-slate-800 bg-white text-emerald-700 shadow-sm">🔒 관리자</button>
             </nav>
         </div>
     </header>
@@ -35,7 +34,7 @@
     <main class="max-w-4xl mx-auto px-4 py-6 flex-1 w-full">
 
         <!-- 1. 추천 도서 목록 탭 -->
-        <section id="section-books" class="space-y-5">
+        <section id="section-books" class="space-y-5 hidden">
             <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 flex items-start gap-3">
                 <span class="text-2xl">💡</span>
                 <div class="text-sm text-emerald-900">
@@ -48,10 +47,10 @@
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 space-y-3">
                 <div class="flex flex-col sm:flex-row gap-3 justify-between items-start sm:items-center">
                     <div class="flex flex-wrap gap-1.5" id="age-filters">
-                        <button onclick="filterAge('all', this)" class="age-btn px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-emerald-600 text-white transition">전체</button>
-                        <button onclick="filterAge('유아', this)" class="age-btn px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition">유아</button>
-                        <button onclick="filterAge('초등 저학년', this)" class="age-btn px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition">초등 저학년</button>
-                        <button onclick="filterAge('초등 고학년', this)" class="age-btn px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition">초등 고학년</button>
+                        <button onclick="filterAge('all', this)" class="age-btn px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition bg-emerald-600 text-white">전체</button>
+                        <button onclick="filterAge('유아', this)" class="age-btn px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium hover:bg-slate-200 transition bg-slate-100 text-slate-600">유아</button>
+                        <button onclick="filterAge('초등 저학년', this)" class="age-btn px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium hover:bg-slate-200 transition bg-slate-100 text-slate-600">초등 저학년</button>
+                        <button onclick="filterAge('초등 고학년', this)" class="age-btn px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium hover:bg-slate-200 transition bg-slate-100 text-slate-600">초등 고학년</button>
                     </div>
 
                     <div class="w-full sm:w-64">
@@ -72,7 +71,1387 @@
             </div>
 
             <!-- 도서 카드 그리드 -->
-            <div id="book-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+            <div id="book-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">유아</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-2" src="https://image.aladin.co.kr/product/39130/49/cover200/k942137552_1.jpg" alt="내 마음속 진흙 괴물에게" onerror="handleCoverError(this, 2)" class=" w-full h-full object-cover">
+                                    <div id="cover-fallback-2" class="hidden flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">내 마음속 진흙 괴물에게</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">내 마음속 진흙 괴물에게</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">베아트리체 알레마냐 글·그림 ;이현경 옮김 | 문학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아883-26-15
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" checked="" onchange="toggleRental(2)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-emerald-700 font-semibold">
+                                ✓ 나의 대여 목록에 담김
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">초등 고학년</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-11" src="https://image.aladin.co.kr/product/38542/79/cover200/k602135432_1.jpg" alt="우리 반 걱정 탐정 차원희" onerror="handleCoverError(this, 11)" class=" w-full h-full object-cover">
+                                    <div id="cover-fallback-11" class="hidden flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">우리 반 걱정 탐정 차원희</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">우리 반 걱정 탐정 차원희</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">송아주 글 ;이서영 그림 | 문학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아813.7-26-851
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(11)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">유아</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-20" src="https://image.aladin.co.kr/product/37226/92/cover200/k802031702_1.jpg" alt="이 열매를 집으로 할까?" onerror="handleCoverError(this, 20)" class=" w-full h-full object-cover">
+                                    <div id="cover-fallback-20" class="hidden flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">이 열매를 집으로 할까?</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">이 열매를 집으로 할까?</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">다카오 유코 글·그림 ;황진희 옮김 | 문학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아833.6-25-297
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(20)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">초등 저학년</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-21" src="https://image.aladin.co.kr/product/37772/55/cover200/k112033560_1.jpg" alt="완다는 별의 소리를 들어요 : 소리로 우주를 연구하는 시각 장애인 천문학자 이야기" onerror="handleCoverError(this, 21)" class=" w-full h-full object-cover">
+                                    <div id="cover-fallback-21" class="hidden flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">완다는 별의 소리를 들어요 : 소리로 우주를 연구하는 시각 장애인 천문학자 이야기</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">완다는 별의 소리를 들어요 : 소리로 우주를 연구하는 시각 장애인 천문학자 이야기</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">저자: 완다 디아스 메르세드,에이미 S. 핸슨 글 ;로시오 아레올라 멘도사 그림 ;지구 옮김 | 역사</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아998.4-25-6
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(21)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">초등 저학년</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-22" src="https://image.aladin.co.kr/product/37255/30/cover200/k862031121_1.jpg" alt="이게 행복이야 : 소소하게 행복한 순간들" onerror="handleCoverError(this, 22)" class=" w-full h-full object-cover">
+                                    <div id="cover-fallback-22" class="hidden flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">이게 행복이야 : 소소하게 행복한 순간들</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">이게 행복이야 : 소소하게 행복한 순간들</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">마르타 쿠닐 지음 ;장한라 옮김 | 철학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아181-25-33
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(22)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">초등 고학년</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-23" src="https://image.aladin.co.kr/product/37823/8/cover200/k812033591_1.jpg" alt="장애인은 버스가 불편해! : 모두가 평등하게 지낼 수 있을까?" onerror="handleCoverError(this, 23)" class=" w-full h-full object-cover">
+                                    <div id="cover-fallback-23" class="hidden flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">장애인은 버스가 불편해! : 모두가 평등하게 지낼 수 있을까?</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">장애인은 버스가 불편해! : 모두가 평등하게 지낼 수 있을까?</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">이기규 지음 ;박지윤 그림 | 사회과학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아342-25-22
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(23)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">초등 고학년</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-24" src="https://image.aladin.co.kr/product/37249/57/cover200/k762031020_1.jpg" alt="사회의 쓴맛" onerror="handleCoverError(this, 24)" class=" w-full h-full object-cover">
+                                    <div id="cover-fallback-24" class="hidden flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">사회의 쓴맛</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">사회의 쓴맛</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">양슬기 시 ;차은정 그림 | 문학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아811.8-25-261
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(24)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">유아</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-25" src="https://image.aladin.co.kr/product/36840/35/cover200/8984145424_1.jpg" alt="파 뽑는 날 : 홍당무 그림책" onerror="handleCoverError(this, 25)" class=" w-full h-full object-cover">
+                                    <div id="cover-fallback-25" class="hidden flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">파 뽑는 날 : 홍당무 그림책</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">파 뽑는 날 : 홍당무 그림책</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">지은이: 홍당무 | 문학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아813.7-25-1850
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(25)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">유아</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-26" src="https://image.aladin.co.kr/product/36764/43/cover200/k022030499_1.jpg" alt="두더지의 조금 용감한 하루" onerror="handleCoverError(this, 26)" class=" w-full h-full object-cover">
+                                    <div id="cover-fallback-26" class="hidden flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">두더지의 조금 용감한 하루</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">두더지의 조금 용감한 하루</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">마야 다츠카와 글·그림 ;장미란 옮김 | 문학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아843-25-269
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(26)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">초등 저학년</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-27" src="https://image.aladin.co.kr/product/37153/11/cover200/k872031476_1.jpg" alt="도서관의 악몽" onerror="handleCoverError(this, 27)" class=" w-full h-full object-cover">
+                                    <div id="cover-fallback-27" class="hidden flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">도서관의 악몽</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">도서관의 악몽</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">자현 글 ;차영경 그림 | 문학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아813.7-25-2374
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(27)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">초등 저학년</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-28" src="https://image.aladin.co.kr/product/37062/8/cover200/894647503x_1.jpg" alt="별일 없는 수요일" onerror="handleCoverError(this, 28)" class=" w-full h-full object-cover">
+                                    <div id="cover-fallback-28" class="hidden flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">별일 없는 수요일</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">별일 없는 수요일</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">글: 곽윤숙 ;그림: 릴리아 | 문학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아813.7-25-2139
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(28)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">초등 고학년</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-29" src="https://image.aladin.co.kr/product/36907/62/cover200/k932030118_1.jpg" alt="전학생" onerror="handleCoverError(this, 29)" class=" w-full h-full object-cover">
+                                    <div id="cover-fallback-29" class="hidden flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">전학생</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">전학생</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">김화요 글 ;Sujan 그림 | 문학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아813.7-25-2018
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(29)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">초등 고학년</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-30" src="https://image.aladin.co.kr/product/36974/51/cover200/8965138256_1.jpg" alt="뭐든 과장하는 마을" onerror="handleCoverError(this, 30)" class=" w-full h-full object-cover">
+                                    <div id="cover-fallback-30" class="hidden flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">뭐든 과장하는 마을</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">뭐든 과장하는 마을</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">글: 셰르민 야샤르 ;그림: 메르트 튀겐 ;옮김: 김지율 | 문학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아839.45-25-5
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(30)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">유아</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-1" src="" alt="새 친구 세 친구 : 김유진 그림책" onerror="handleCoverError(this, 1)" class="hidden w-full h-full object-cover">
+                                    <div id="cover-fallback-1" class="flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">새 친구 세 친구 : 김유진 그림책</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">새 친구 세 친구 : 김유진 그림책</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">글·그림: 김유진 | 문학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아813.7-26-961
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" checked="" onchange="toggleRental(1)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-emerald-700 font-semibold">
+                                ✓ 나의 대여 목록에 담김
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">초등 저학년</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-3" src="" alt="다시 하면 되지 뭐 : 실패로 단단해지는 회복탄력성" onerror="handleCoverError(this, 3)" class="hidden w-full h-full object-cover">
+                                    <div id="cover-fallback-3" class="flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">다시 하면 되지 뭐 : 실패로 단단해지는 회복탄력성</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">다시 하면 되지 뭐 : 실패로 단단해지는 회복탄력성</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">사라 린 룰 지음 ;문송이 옮김 | 문학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아843-26-124
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(3)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">초등 저학년</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-4" src="" alt="지렁이 키우지렁 : 나의 첫 반려동물, 지렁이와 함께 사는 법" onerror="handleCoverError(this, 4)" class="hidden w-full h-full object-cover">
+                                    <div id="cover-fallback-4" class="flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">지렁이 키우지렁 : 나의 첫 반려동물, 지렁이와 함께 사는 법</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">지렁이 키우지렁 : 나의 첫 반려동물, 지렁이와 함께 사는 법</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">김지원 글·그림 | 자연과학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아493-26-1
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(4)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">초등 고학년</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-5" src="" alt="두근두근 클라이밍" onerror="handleCoverError(this, 5)" class="hidden w-full h-full object-cover">
+                                    <div id="cover-fallback-5" class="flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">두근두근 클라이밍</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">두근두근 클라이밍</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">김환희 글 ;오삼이 그림 | 문학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아813.7-26-1722
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(5)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">초등 고학년</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-6" src="" alt="당연한 것은 없어 : 생각을 여는 생명과학의 질문들" onerror="handleCoverError(this, 6)" class="hidden w-full h-full object-cover">
+                                    <div id="cover-fallback-6" class="flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">당연한 것은 없어 : 생각을 여는 생명과학의 질문들</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">당연한 것은 없어 : 생각을 여는 생명과학의 질문들</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">이고은 지음 | 자연과학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아470-26-6
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(6)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">유아</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-7" src="" alt="내가 더 더 더 자라면" onerror="handleCoverError(this, 7)" class="hidden w-full h-full object-cover">
+                                    <div id="cover-fallback-7" class="flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">내가 더 더 더 자라면</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">내가 더 더 더 자라면</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">아나 페즈 글·그림 ;김윤정 옮김 | 문학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아873-26-5
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(7)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">유아</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-8" src="" alt="나쁜 일이 있어도 나쁜 날은 아니야" onerror="handleCoverError(this, 8)" class="hidden w-full h-full object-cover">
+                                    <div id="cover-fallback-8" class="flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">나쁜 일이 있어도 나쁜 날은 아니야</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">나쁜 일이 있어도 나쁜 날은 아니야</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">글: 정문정 ;그림: 피도크 | 철학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아181-26-5
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(8)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">초등 저학년</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-9" src="" alt="괴상한 내 친구를 소개합니다" onerror="handleCoverError(this, 9)" class="hidden w-full h-full object-cover">
+                                    <div id="cover-fallback-9" class="flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">괴상한 내 친구를 소개합니다</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">괴상한 내 친구를 소개합니다</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">조슈아 데이비드 스테인 글 ;마리아키아라 디 조르조 그림 ;정재원 옮김 | 문학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아843-26-64
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(9)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">초등 저학년</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-10" src="" alt="빵값이 너무 비싸 : 가격·수요·공급" onerror="handleCoverError(this, 10)" class="hidden w-full h-full object-cover">
+                                    <div id="cover-fallback-10" class="flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">빵값이 너무 비싸 : 가격·수요·공급</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">빵값이 너무 비싸 : 가격·수요·공급</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">은경 글 ;보라 그림 | 사회과학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아320-26-16
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(10)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">초등 고학년</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-12" src="" alt="지구 정복을 위한 고롱고롱 인간 관찰기 : 인간을 알고 약점을 알면 백전백승!" onerror="handleCoverError(this, 12)" class="hidden w-full h-full object-cover">
+                                    <div id="cover-fallback-12" class="flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">지구 정복을 위한 고롱고롱 인간 관찰기 : 인간을 알고 약점을 알면 백전백승!</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">지구 정복을 위한 고롱고롱 인간 관찰기 : 인간을 알고 약점을 알면 백전백승!</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">블랙캣 글 ;현영진 그림 | 자연과학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아471-26-2
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(12)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">유아</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-13" src="" alt="모두 충전하는 사이에 : AI 시대, 모두 똑같은 로봇이 되지 않는 법" onerror="handleCoverError(this, 13)" class="hidden w-full h-full object-cover">
+                                    <div id="cover-fallback-13" class="flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">모두 충전하는 사이에 : AI 시대, 모두 똑같은 로봇이 되지 않는 법</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">모두 충전하는 사이에 : AI 시대, 모두 똑같은 로봇이 되지 않는 법</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">데이비드 비에드지키 글·그림 ;이지유 옮김 | 문학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아843-25-98
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(13)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">유아</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-14" src="" alt="우주 택배" onerror="handleCoverError(this, 14)" class="hidden w-full h-full object-cover">
+                                    <div id="cover-fallback-14" class="flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">우주 택배</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">우주 택배</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">이수현 글·그림 | 문학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아813.7-21-1509
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(14)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">초등 저학년</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-15" src="" alt="진짜로 올지도 몰라, 이런 미래 : 10년 후 세계 미리 보기" onerror="handleCoverError(this, 15)" class="hidden w-full h-full object-cover">
+                                    <div id="cover-fallback-15" class="flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">진짜로 올지도 몰라, 이런 미래 : 10년 후 세계 미리 보기</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">진짜로 올지도 몰라, 이런 미래 : 10년 후 세계 미리 보기</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">글: 김영주 ;그림: 송효정 | 사회과학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아331-25-31
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(15)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">초등 저학년</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-16" src="" alt="인공지능이 뽑은 반장 : 동화로 배우는 인공지능 윤리" onerror="handleCoverError(this, 16)" class="hidden w-full h-full object-cover">
+                                    <div id="cover-fallback-16" class="flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">인공지능이 뽑은 반장 : 동화로 배우는 인공지능 윤리</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">인공지능이 뽑은 반장 : 동화로 배우는 인공지능 윤리</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">지은이: 허유선,김선일,김유빈,김원,김지영,박다은,우연주,이혜교,장예은 ;그린이: 우지현 | 총류</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아004.7-26-2
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(16)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">초등 고학년</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-17" src="" alt="휴먼 2.0 : 인류를 위한 최고의 혁명, 생체 공학" onerror="handleCoverError(this, 17)" class="hidden w-full h-full object-cover">
+                                    <div id="cover-fallback-17" class="flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">휴먼 2.0 : 인류를 위한 최고의 혁명, 생체 공학</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">휴먼 2.0 : 인류를 위한 최고의 혁명, 생체 공학</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">패트릭 케인 글 ;새뮤얼 로드리게스 그림 ;김선영 옮김 | 기술과학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아510-26-1
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(17)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">초등 고학년</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-18" src="" alt="섀클턴 달 기지를 짓다" onerror="handleCoverError(this, 18)" class="hidden w-full h-full object-cover">
+                                    <div id="cover-fallback-18" class="flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">섀클턴 달 기지를 짓다</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">섀클턴 달 기지를 짓다</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">마르코 T. 브라멘 글 ;욘나 할베리 그림 ;이유진 옮김 | 자연과학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아443-25-3
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(18)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <!-- 상단 뱃지 영역 -->
+                            <div class="flex flex-wrap justify-between items-center gap-1.5 mb-3">
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">유아</span>
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">🏛️ 국립어린이청소년도서관</span>
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                                </div>
+                            </div>
+
+                            <!-- 책 표지 + 도서 기본 정보 영역 -->
+                            <div class="flex gap-3.5 mb-3">
+                                <!-- 표지 썸네일 -->
+                                <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
+                                    <img id="cover-img-19" src="" alt="세상에 오직 하나뿐인 너" onerror="handleCoverError(this, 19)" class="hidden w-full h-full object-cover">
+                                    <div id="cover-fallback-19" class="flex flex-col items-center justify-center p-2 text-center">
+                                        <span class="text-2xl mb-1">📖</span>
+                                        <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">세상에 오직 하나뿐인 너</span>
+                                    </div>
+                                </div>
+
+                                <!-- 제목, 저자, 청구기호 -->
+                                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">세상에 오직 하나뿐인 너</h3>
+                                        <p class="text-xs text-slate-500 mb-2 truncate">셰인 헤거티 글 ;벤 맨틀 그림 ;신수진 옮김 | 문학</p>
+                                    </div>
+                                    
+                                    <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
+                                        <strong class="text-slate-700 font-sans">청구기호:</strong> 아843-25-395
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl leading-relaxed">사서가 추천하는 유익한 도서입니다.</p>
+                        </div>
+
+                        <label class="flex items-center gap-2 cursor-pointer pt-2.5 border-t border-slate-100 select-none">
+                            <input type="checkbox" onchange="toggleRental(19)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-600">
+                                대여 목록에 담기
+                            </span>
+                        </label>
+                    </div>
+                </div>
         </section>
 
         <!-- 2. 나의 대여 목록 탭 -->
@@ -80,7 +1459,7 @@
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                 <div>
                     <h2 class="text-lg font-bold text-slate-800">방문 전 도서관 소장 및 대여 현황</h2>
-                    <p class="text-xs text-slate-500 mt-0.5" id="active-libs-summary">내 도서관: 불러오는 중...</p>
+                    <p class="text-xs text-slate-500 mt-0.5" id="active-libs-summary">내 도서관 · 광주시립오포도서관 · 광남작은도서관</p>
                 </div>
                 <button onclick="checkLibraryStatusAll()" class="w-full sm:w-auto px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium rounded-xl transition shadow-sm">
                     🔄 대여 현황 새로고침
@@ -88,7 +1467,79 @@
             </div>
 
             <!-- 담긴 도서 목록 -->
-            <div id="rental-list" class="space-y-4"></div>
+            <div id="rental-list" class="space-y-4">
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col md:flex-row justify-between gap-4 items-start md:items-center">
+                        <div class="space-y-1.5 flex-1">
+                            <div class="flex flex-wrap items-center gap-1.5">
+                                <span class="px-2 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">유아</span>
+                                <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">국립어린이청소년도서관</span>
+                                <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                            </div>
+                            <h3 class="font-bold text-slate-800 text-base">새 친구 세 친구 : 김유진 그림책</h3>
+                            <p class="text-xs text-slate-500">글·그림: 김유진 | 청구기호: <span class="font-mono font-semibold text-slate-700">아813.7-26-961</span></p>
+                            
+                            <label class="inline-flex items-center gap-2 mt-2 cursor-pointer px-3 py-1.5 rounded-xl border transition select-none bg-slate-50 border-slate-200">
+                                <input type="checkbox" onchange="toggleRentalCheck(1)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                                <span class="text-xs font-bold text-slate-600">
+                                    대여예정
+                                </span>
+                            </label>
+                        </div>
+
+                        <div class="w-full md:w-72 space-y-2">
+                            <div class="text-xs font-bold text-slate-500">도서관별 소장 및 대여 상태</div>
+                            <div class="space-y-1.5">
+                                
+                        <div class="flex items-center justify-between bg-slate-50 p-2.5 rounded-xl text-xs">
+                            <span class="font-medium text-slate-700 truncate max-w-[140px]">광주시립오포도서관</span>
+                            <span class="px-2 py-1 rounded-lg font-semibold bg-slate-100 text-slate-600">조회 필요</span>
+                        </div>
+                    
+                        <div class="flex items-center justify-between bg-slate-50 p-2.5 rounded-xl text-xs">
+                            <span class="font-medium text-slate-700 truncate max-w-[140px]">광남작은도서관</span>
+                            <span class="px-2 py-1 rounded-lg font-semibold bg-slate-100 text-slate-600">조회 필요</span>
+                        </div>
+                    
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col md:flex-row justify-between gap-4 items-start md:items-center">
+                        <div class="space-y-1.5 flex-1">
+                            <div class="flex flex-wrap items-center gap-1.5">
+                                <span class="px-2 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">유아</span>
+                                <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/70 text-[11px] font-medium rounded-md">국립어린이청소년도서관</span>
+                                <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold rounded-md">2026년 추천</span>
+                            </div>
+                            <h3 class="font-bold text-slate-800 text-base">내 마음속 진흙 괴물에게</h3>
+                            <p class="text-xs text-slate-500">베아트리체 알레마냐 글·그림 ;이현경 옮김 | 청구기호: <span class="font-mono font-semibold text-slate-700">아883-26-15</span></p>
+                            
+                            <label class="inline-flex items-center gap-2 mt-2 cursor-pointer px-3 py-1.5 rounded-xl border transition select-none bg-slate-50 border-slate-200">
+                                <input type="checkbox" onchange="toggleRentalCheck(2)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                                <span class="text-xs font-bold text-slate-600">
+                                    대여예정
+                                </span>
+                            </label>
+                        </div>
+
+                        <div class="w-full md:w-72 space-y-2">
+                            <div class="text-xs font-bold text-slate-500">도서관별 소장 및 대여 상태</div>
+                            <div class="space-y-1.5">
+                                
+                        <div class="flex items-center justify-between bg-slate-50 p-2.5 rounded-xl text-xs">
+                            <span class="font-medium text-slate-700 truncate max-w-[140px]">광주시립오포도서관</span>
+                            <span class="px-2 py-1 rounded-lg font-semibold bg-slate-100 text-slate-600">조회 필요</span>
+                        </div>
+                    
+                        <div class="flex items-center justify-between bg-slate-50 p-2.5 rounded-xl text-xs">
+                            <span class="font-medium text-slate-700 truncate max-w-[140px]">광남작은도서관</span>
+                            <span class="px-2 py-1 rounded-lg font-semibold bg-slate-100 text-slate-600">조회 필요</span>
+                        </div>
+                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </section>
 
         <!-- 3. 내 도서관 설정 탭 -->
@@ -102,9 +1553,27 @@
                 <!-- 현재 등록된 내 도서관 목록 -->
                 <div class="space-y-2.5">
                     <div class="flex justify-between items-center">
-                        <span class="text-xs font-bold text-emerald-700">등록된 내 도서관 (<span id="selected-lib-count">0</span>/3)</span>
+                        <span class="text-xs font-bold text-emerald-700">등록된 내 도서관 (<span id="selected-lib-count">2</span>/3)</span>
                     </div>
-                    <div id="my-libraries-list" class="space-y-2"></div>
+                    <div id="my-libraries-list" class="space-y-2">
+                <div class="flex items-center justify-between px-4 py-3 bg-emerald-50/70 border border-emerald-200 rounded-xl">
+                    <div>
+                        <span class="font-bold text-sm text-slate-800">광주시립오포도서관</span>
+                    </div>
+                    <button onclick="removeLibrary(0)" class="text-xs font-medium text-rose-600 hover:text-rose-700 px-2.5 py-1 rounded-lg hover:bg-rose-50 transition">
+                        빼기
+                    </button>
+                </div>
+            
+                <div class="flex items-center justify-between px-4 py-3 bg-emerald-50/70 border border-emerald-200 rounded-xl">
+                    <div>
+                        <span class="font-bold text-sm text-slate-800">광남작은도서관</span>
+                    </div>
+                    <button onclick="removeLibrary(1)" class="text-xs font-medium text-rose-600 hover:text-rose-700 px-2.5 py-1 rounded-lg hover:bg-rose-50 transition">
+                        빼기
+                    </button>
+                </div>
+            </div>
                 </div>
 
                 <!-- 도서관 검색 박스 -->
@@ -150,10 +1619,10 @@
         </section>
 
         <!-- 4. 관리자 메뉴 탭 -->
-        <section id="section-admin" class="space-y-6 hidden">
+        <section id="section-admin" class="space-y-6">
             
             <!-- 비밀번호 로그인 화면 -->
-            <div id="admin-login-box" class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 max-w-md mx-auto text-center space-y-4">
+            <div id="admin-login-box" class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 max-w-md mx-auto text-center space-y-4 hidden">
                 <div class="w-12 h-12 bg-emerald-50 text-emerald-700 rounded-full flex items-center justify-center mx-auto text-xl">🔐</div>
                 <div>
                     <h2 class="text-lg font-bold text-slate-800">관리자 전용 메뉴</h2>
@@ -168,7 +1637,7 @@
             </div>
 
             <!-- 관리자 대시보드 (로그인 성공 시 표시) -->
-            <div id="admin-dashboard" class="hidden space-y-6">
+            <div id="admin-dashboard" class="space-y-6">
                 <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                     <div>
                         <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[11px] font-bold rounded-md">ADMIN MODE</span>
@@ -212,7 +1681,7 @@
                     <div class="space-y-4">
                         <div class="flex items-center gap-4 text-xs font-medium text-slate-700">
                             <label class="flex items-center gap-1.5 cursor-pointer">
-                                <input type="radio" name="upload-mode" value="replace" checked class="text-emerald-600 focus:ring-emerald-500">
+                                <input type="radio" name="upload-mode" value="replace" checked="" class="text-emerald-600 focus:ring-emerald-500">
                                 <span>기존 목록 전체 교체</span>
                             </label>
                             <label class="flex items-center gap-1.5 cursor-pointer">
@@ -227,13 +1696,13 @@
                                 <p class="text-sm font-semibold text-emerald-800">클릭하여 엑셀 파일(.xlsx, .xls, .csv) 선택</p>
                                 <p class="text-xs text-slate-500 mt-1">파일 선택 즉시 자동으로 도서 목록에 반영됩니다.</p>
                             </div>
-                            <input type="file" id="excel-file-input" accept=".xlsx, .xls, .csv" onchange="handleExcelUpload(event)" class="hidden" />
+                            <input type="file" id="excel-file-input" accept=".xlsx, .xls, .csv" onchange="handleExcelUpload(event)" class="hidden">
                         </label>
                     </div>
 
                     <!-- 현재 등록된 도서 수 및 초기화 / 배포용 다운로드 -->
                     <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-3">
-                        <p class="text-xs text-slate-600">현재 등록된 추천도서: <strong class="text-emerald-700 text-sm" id="admin-book-count">0</strong>권</p>
+                        <p class="text-xs text-slate-600">현재 등록된 추천도서: <strong class="text-emerald-700 text-sm" id="admin-book-count">30</strong>권</p>
                         <div class="flex flex-wrap gap-2">
                             <button onclick="resetBooksToDefault()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-medium rounded-xl transition">
                                 기본 샘플로 초기화
@@ -252,7 +1721,24 @@
                         <p class="text-xs text-slate-500 mt-0.5">현재 등록된 추천도서 분포와 나의 대여 현황 요약입니다.</p>
                     </div>
 
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="stats-cards"></div>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="stats-cards">
+                <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 text-center">
+                    <p class="text-xs text-slate-500">전체 추천도서</p>
+                    <p class="text-xl font-bold text-slate-800 mt-1">30권</p>
+                </div>
+                <div class="p-4 bg-emerald-50/70 rounded-xl border border-emerald-100 text-center">
+                    <p class="text-xs text-emerald-700">유아 도서</p>
+                    <p class="text-xl font-bold text-emerald-800 mt-1">10권</p>
+                </div>
+                <div class="p-4 bg-amber-50/70 rounded-xl border border-amber-100 text-center">
+                    <p class="text-xs text-amber-700">초등 저학년</p>
+                    <p class="text-xl font-bold text-amber-800 mt-1">10권</p>
+                </div>
+                <div class="p-4 bg-sky-50/70 rounded-xl border border-sky-100 text-center">
+                    <p class="text-xs text-sky-700">초등 고학년</p>
+                    <p class="text-xl font-bold text-sky-800 mt-1">10권</p>
+                </div>
+            </div>
 
                     <div class="p-6 bg-slate-50 rounded-2xl border border-dashed border-slate-200 text-center space-y-1.5">
                         <span class="text-2xl">📊</span>
@@ -277,15 +1763,368 @@
         const ADMIN_PASSWORD = "1234";
 
         const initialBooksData = [
-            { id: 1, title: "수박 수영장", author: "안녕달 저", age: "유아", category: "그림책", source: "서울시교육청 공공도서관", year: "2026", callNo: "유 813.8-안192ㅅ", isbn: "9788936454807", desc: "커다란 수박 속에서 온 마을 사람들이 함께 즐기는 시원한 여름 이야기" },
-            { id: 2, title: "알사탕", author: "백희나 저", age: "유아", category: "그림책", source: "국립어린이청소년도서관", year: "2026", callNo: "유 813.8-백97ㅇ", isbn: "9788993242928", desc: "신비한 알사탕을 먹으면 마음의 소리가 들리는 따뜻한 그림책" },
-            { id: 3, title: "구름빵", author: "백희나 저", age: "유아", category: "생활동화", source: "서울시교육청 어린이도서관", year: "2025", callNo: "유 813.8-백97ㄱ", isbn: "9788988095454", desc: "비 오는 날 나뭇가지에 걸린 구름으로 만든 빵을 먹고 하늘을 나는 이야기" },
-            { id: 4, title: "만복이네 떡집", author: "김리리 저", age: "초등 저학년", category: "창작동화", source: "서울시교육청 공공도서관", year: "2026", callNo: "아 813.8-김297ㅁ", isbn: "9788949161341", desc: "신비한 떡집에서 벌어지는 따뜻하고 유쾌한 마음 성장 동화" },
-            { id: 5, title: "고양이 해결사 깜냥 1", author: "홍민정 저", age: "초등 저학년", category: "동화", source: "국립어린이청소년도서관", year: "2025", callNo: "아 813.8-홍38ㄱ-1", isbn: "9788936447717", desc: "아파트 경비실에 나타난 길고양이 깜냥의 유쾌한 해결사 활약기" },
-            { id: 6, title: "강아지똥", author: "권정생 저", age: "유아", category: "인성", source: "서울시교육청 어린이도서관", year: "2026", callNo: "유 813.8-권74ㄱ", isbn: "9788971968451", desc: "세상 모든 존재에는 소중한 가치가 있음을 일깨워주는 감동 그림책" },
-            { id: 7, title: "긴긴밤", author: "루리 저", age: "초등 고학년", category: "문학", source: "서울시교육청 공공도서관", year: "2026", callNo: "아 813.8-루298ㄱ", isbn: "9791165341909", desc: "세상에 마지막 남은 흰바위코뿔소와 어린 펭귄의 연대와 사랑" },
-            { id: 8, title: "마당을 나온 암탉", author: "황선미 저", age: "초등 고학년", category: "생태", source: "국립어린이청소년도서관", year: "2025", callNo: "아 813.8-황54ㅁ", isbn: "9788934904809", desc: "자유와 소망을 찾아 마당을 나선 암탉 잎싹의 감동적인 삶" }
-        ];
+          {
+                    "id": 1,
+                    "title": "새 친구 세 친구 : 김유진 그림책",
+                    "author": "글·그림: 김유진",
+                    "age": "유아",
+                    "category": "문학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아813.7-26-961",
+                    "isbn": "97889624773379791194770466",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 2,
+                    "title": "내 마음속 진흙 괴물에게",
+                    "author": "베아트리체 알레마냐 글·그림 ;이현경 옮김",
+                    "age": "유아",
+                    "category": "문학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아883-26-15",
+                    "isbn": "9791194028727",
+                    "desc": "사서가 추천하는 유익한 도서입니다.",
+                    "coverUrl": "https://image.aladin.co.kr/product/39130/49/cover200/k942137552_1.jpg"
+          },
+          {
+                    "id": 3,
+                    "title": "다시 하면 되지 뭐 : 실패로 단단해지는 회복탄력성",
+                    "author": "사라 린 룰 지음 ;문송이 옮김",
+                    "age": "초등 저학년",
+                    "category": "문학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아843-26-124",
+                    "isbn": "9791194148555",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 4,
+                    "title": "지렁이 키우지렁 : 나의 첫 반려동물, 지렁이와 함께 사는 법",
+                    "author": "김지원 글·그림",
+                    "age": "초등 저학년",
+                    "category": "자연과학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아493-26-1",
+                    "isbn": "9788925569802",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 5,
+                    "title": "두근두근 클라이밍",
+                    "author": "김환희 글 ;오삼이 그림",
+                    "age": "초등 고학년",
+                    "category": "문학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아813.7-26-1722",
+                    "isbn": "97911854947469791194439691",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 6,
+                    "title": "당연한 것은 없어 : 생각을 여는 생명과학의 질문들",
+                    "author": "이고은 지음",
+                    "age": "초등 고학년",
+                    "category": "자연과학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아470-26-6",
+                    "isbn": "9788936453343",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 7,
+                    "title": "내가 더 더 더 자라면",
+                    "author": "아나 페즈 글·그림 ;김윤정 옮김",
+                    "age": "유아",
+                    "category": "문학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아873-26-5",
+                    "isbn": "9791199289963",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 8,
+                    "title": "나쁜 일이 있어도 나쁜 날은 아니야",
+                    "author": "글: 정문정 ;그림: 피도크",
+                    "age": "유아",
+                    "category": "철학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아181-26-5",
+                    "isbn": "9791199555136",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 9,
+                    "title": "괴상한 내 친구를 소개합니다",
+                    "author": "조슈아 데이비드 스테인 글 ;마리아키아라 디 조르조 그림 ;정재원 옮김",
+                    "age": "초등 저학년",
+                    "category": "문학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아843-26-64",
+                    "isbn": "9791174260246",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 10,
+                    "title": "빵값이 너무 비싸 : 가격·수요·공급",
+                    "author": "은경 글 ;보라 그림",
+                    "age": "초등 저학년",
+                    "category": "사회과학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아320-26-16",
+                    "isbn": "97911948090439791194809142",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 11,
+                    "title": "우리 반 걱정 탐정 차원희",
+                    "author": "송아주 글 ;이서영 그림",
+                    "age": "초등 고학년",
+                    "category": "문학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아813.7-26-851",
+                    "isbn": "9791163144496",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 12,
+                    "title": "지구 정복을 위한 고롱고롱 인간 관찰기 : 인간을 알고 약점을 알면 백전백승!",
+                    "author": "블랙캣 글 ;현영진 그림",
+                    "age": "초등 고학년",
+                    "category": "자연과학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아471-26-2",
+                    "isbn": "9788961773621",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 13,
+                    "title": "모두 충전하는 사이에 : AI 시대, 모두 똑같은 로봇이 되지 않는 법",
+                    "author": "데이비드 비에드지키 글·그림 ;이지유 옮김",
+                    "age": "유아",
+                    "category": "문학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아843-25-98",
+                    "isbn": "9791192655932",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 14,
+                    "title": "우주 택배",
+                    "author": "이수현 글·그림",
+                    "age": "유아",
+                    "category": "문학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아813.7-21-1509",
+                    "isbn": "9791165797089",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 15,
+                    "title": "진짜로 올지도 몰라, 이런 미래 : 10년 후 세계 미리 보기",
+                    "author": "글: 김영주 ;그림: 송효정",
+                    "age": "초등 저학년",
+                    "category": "사회과학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아331-25-31",
+                    "isbn": "9791167553317",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 16,
+                    "title": "인공지능이 뽑은 반장 : 동화로 배우는 인공지능 윤리",
+                    "author": "지은이: 허유선,김선일,김유빈,김원,김지영,박다은,우연주,이혜교,장예은 ;그린이: 우지현",
+                    "age": "초등 저학년",
+                    "category": "총류",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아004.7-26-2",
+                    "isbn": "9791188717392",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 17,
+                    "title": "휴먼 2.0 : 인류를 위한 최고의 혁명, 생체 공학",
+                    "author": "패트릭 케인 글 ;새뮤얼 로드리게스 그림 ;김선영 옮김",
+                    "age": "초등 고학년",
+                    "category": "기술과학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아510-26-1",
+                    "isbn": "9791194028659",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 18,
+                    "title": "섀클턴 달 기지를 짓다",
+                    "author": "마르코 T. 브라멘 글 ;욘나 할베리 그림 ;이유진 옮김",
+                    "age": "초등 고학년",
+                    "category": "자연과학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아443-25-3",
+                    "isbn": "9791165884215",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 19,
+                    "title": "세상에 오직 하나뿐인 너",
+                    "author": "셰인 헤거티 글 ;벤 맨틀 그림 ;신수진 옮김",
+                    "age": "유아",
+                    "category": "문학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아843-25-395",
+                    "isbn": "9788911732883",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 20,
+                    "title": "이 열매를 집으로 할까?",
+                    "author": "다카오 유코 글·그림 ;황진희 옮김",
+                    "age": "유아",
+                    "category": "문학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아833.6-25-297",
+                    "isbn": "9791165736798",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 21,
+                    "title": "완다는 별의 소리를 들어요 : 소리로 우주를 연구하는 시각 장애인 천문학자 이야기",
+                    "author": "저자: 완다 디아스 메르세드,에이미 S. 핸슨 글 ;로시오 아레올라 멘도사 그림 ;지구 옮김",
+                    "age": "초등 저학년",
+                    "category": "역사",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아998.4-25-6",
+                    "isbn": "9791192894836",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 22,
+                    "title": "이게 행복이야 : 소소하게 행복한 순간들",
+                    "author": "마르타 쿠닐 지음 ;장한라 옮김",
+                    "age": "초등 저학년",
+                    "category": "철학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아181-25-33",
+                    "isbn": "9791194797142",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 23,
+                    "title": "장애인은 버스가 불편해! : 모두가 평등하게 지낼 수 있을까?",
+                    "author": "이기규 지음 ;박지윤 그림",
+                    "age": "초등 고학년",
+                    "category": "사회과학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아342-25-22",
+                    "isbn": "9791193759073",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 24,
+                    "title": "사회의 쓴맛",
+                    "author": "양슬기 시 ;차은정 그림",
+                    "age": "초등 고학년",
+                    "category": "문학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아811.8-25-261",
+                    "isbn": "9791141612863",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 25,
+                    "title": "파 뽑는 날 : 홍당무 그림책",
+                    "author": "지은이: 홍당무",
+                    "age": "유아",
+                    "category": "문학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아813.7-25-1850",
+                    "isbn": "9788984145429",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 26,
+                    "title": "두더지의 조금 용감한 하루",
+                    "author": "마야 다츠카와 글·그림 ;장미란 옮김",
+                    "age": "유아",
+                    "category": "문학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아843-25-269",
+                    "isbn": "9791158365424",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 27,
+                    "title": "도서관의 악몽",
+                    "author": "자현 글 ;차영경 그림",
+                    "age": "초등 저학년",
+                    "category": "문학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아813.7-25-2374",
+                    "isbn": "9791198860583",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 28,
+                    "title": "별일 없는 수요일",
+                    "author": "글: 곽윤숙 ;그림: 릴리아",
+                    "age": "초등 저학년",
+                    "category": "문학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아813.7-25-2139",
+                    "isbn": "9788946475038",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 29,
+                    "title": "전학생",
+                    "author": "김화요 글 ;Sujan 그림",
+                    "age": "초등 고학년",
+                    "category": "문학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아813.7-25-2018",
+                    "isbn": "9791193914984",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          },
+          {
+                    "id": 30,
+                    "title": "뭐든 과장하는 마을",
+                    "author": "글: 셰르민 야샤르 ;그림: 메르트 튀겐 ;옮김: 김지율",
+                    "age": "초등 고학년",
+                    "category": "문학",
+                    "source": "국립어린이청소년도서관",
+                    "year": "2026",
+                    "callNo": "아839.45-25-5",
+                    "isbn": "9788965138259",
+                    "desc": "사서가 추천하는 유익한 도서입니다."
+          }
+];
 
         let booksData = JSON.parse(localStorage.getItem('custom_books_data') || 'null') || [...initialBooksData];
         let coverCache = JSON.parse(localStorage.getItem('book_cover_cache') || '{}');
@@ -1020,5 +2859,6 @@
             alert("조회가 완료되었습니다!");
         }
     </script>
-</body>
-</html>
+
+
+</body><grammar-mirror data-generated="whale-grammar"></grammar-mirror><whale-quicksearch translate="no" style="visibility: visible;"></whale-quicksearch></html>
