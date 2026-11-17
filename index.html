@@ -44,10 +44,9 @@
                 </div>
             </div>
 
-            <!-- 필터 바 (연령 필터 + 대여 목록 담김 여부 필터 + 검색창) -->
+            <!-- 필터 바 -->
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 space-y-3">
                 <div class="flex flex-col sm:flex-row gap-3 justify-between items-start sm:items-center">
-                    <!-- 연령 필터 -->
                     <div class="flex flex-wrap gap-1.5" id="age-filters">
                         <button onclick="filterAge('all', this)" class="age-btn px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-emerald-600 text-white transition">전체</button>
                         <button onclick="filterAge('유아', this)" class="age-btn px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition">유아</button>
@@ -55,7 +54,6 @@
                         <button onclick="filterAge('초등 고학년', this)" class="age-btn px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition">초등 고학년</button>
                     </div>
 
-                    <!-- 검색창 -->
                     <div class="w-full sm:w-64">
                         <input type="text" id="search-input" oninput="handleSearch()" placeholder="도서명, 저자, 출처, 연도 검색..." class="w-full px-3.5 py-2 text-sm rounded-xl border border-slate-200 focus:outline-none focus:border-emerald-500">
                     </div>
@@ -173,7 +171,6 @@
                         <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[11px] font-bold rounded-md">ADMIN MODE</span>
                         <h2 class="text-lg font-bold text-slate-800 mt-1">관리자 대시보드</h2>
                     </div>
-                    <!-- 관리자 서브 메뉴 (엑셀 관리 / 통계) -->
                     <div class="flex bg-slate-100 p-1 rounded-xl text-xs font-semibold">
                         <button onclick="switchAdminSubTab('excel')" id="subtab-excel" class="px-3.5 py-2 rounded-lg bg-white text-emerald-700 shadow-sm transition">📊 추천도서 엑셀 관리</button>
                         <button onclick="switchAdminSubTab('stats')" id="subtab-stats" class="px-3.5 py-2 rounded-lg text-slate-600 transition">📈 통계 현황 (준비중)</button>
@@ -185,7 +182,7 @@
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-100 pb-4">
                         <div>
                             <h3 class="font-bold text-slate-800 text-base">엑셀 파일로 추천도서 일괄 등록</h3>
-                            <p class="text-xs text-slate-500 mt-0.5">엑셀(.xlsx, .xls, .csv)을 업로드하면 추천도서 목록이 즉시 갱신됩니다.</p>
+                            <p class="text-xs text-slate-500 mt-0.5">엑셀(.xlsx, .xls, .csv)을 업로드하면 추천도서 목록과 표지가 자동 갱신됩니다.</p>
                         </div>
                         <button onclick="downloadSampleExcel()" class="px-3.5 py-2 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 text-xs font-semibold rounded-xl transition shrink-0">
                             📥 샘플 엑셀 양식 다운로드
@@ -276,7 +273,6 @@
         const DEFAULT_API_KEY = "81211fd9d9c07fe4a8af9ff8be7fc84551f8e839bf8072cb907902e579114fea";
         const ADMIN_PASSWORD = "1234";
 
-        // 기본 샘플 도서 데이터 (실제 ISBN이 반영되어 표지 이미지가 자동 조회됩니다)
         const initialBooksData = [
             { id: 1, title: "수박 수영장", author: "안녕달 저", age: "유아", category: "그림책", source: "서울시교육청 공공도서관", year: "2026", callNo: "유 813.8-안192ㅅ", isbn: "9788936454807", desc: "커다란 수박 속에서 온 마을 사람들이 함께 즐기는 시원한 여름 이야기" },
             { id: 2, title: "알사탕", author: "백희나 저", age: "유아", category: "그림책", source: "국립어린이청소년도서관", year: "2026", callNo: "유 813.8-백97ㅇ", isbn: "9788993242928", desc: "신비한 알사탕을 먹으면 마음의 소리가 들리는 따뜻한 그림책" },
@@ -289,9 +285,8 @@
         ];
 
         let booksData = JSON.parse(localStorage.getItem('custom_books_data') || 'null') || [...initialBooksData];
-        let coverCache = JSON.parse(localStorage.getItem('book_cover_cache') || '{}'); // { isbn: imageUrl }
+        let coverCache = JSON.parse(localStorage.getItem('book_cover_cache') || '{}');
 
-        // 백업용 도서관 목록
         const fallbackLibraries = [
             { name: "서울특별시교육청 어린이도서관", code: "111014", region: "11", address: "서울특별시 종로구 사직로9길 7" },
             { name: "국립어린이청소년도서관", code: "111270", region: "11", address: "서울특별시 강남구 테헤란로7길 21" },
@@ -314,9 +309,8 @@
             { name: "성남시판교도서관", code: "141301", region: "31", address: "경기도 성남시 분당구" }
         ];
 
-        // 앱 상태 관리
         let currentAgeFilter = 'all';
-        let currentRentedFilter = 'all'; // 'all' | 'unrented' | 'rented'
+        let currentRentedFilter = 'all';
         let searchQuery = '';
         let rentalList = JSON.parse(localStorage.getItem('my_rental_list') || '[]');
         let rentalStatusData = JSON.parse(localStorage.getItem('my_rental_status') || '{}');
@@ -334,38 +328,98 @@
             renderRentalList();
             updateBadgeCount();
             updateAdminBookCount();
-            fetchBookCoversAsync(); // 책 표지 이미지 비동기 로딩
+            fetchBookCoversAsync();
         };
 
-        // 정보나루 도서 상세조회 API(srchDtlList)로 실제 한국 도서 표지 URL 자동 수집
-        async function fetchBookCoversAsync() {
-            let updated = false;
-            for(let book of booksData) {
-                if(!book.isbn || coverCache[book.isbn]) continue;
+        // HTTPS 강제 변환 헬퍼 (Vercel 보안 차단 방지)
+        function ensureHttps(url) {
+            if(!url) return '';
+            return url.replace(/^http:\/\//i, 'https://');
+        }
+
+        // 정보나루(srchDtlList) + Google Books API 이중 표지 조회
+        async function fetchSingleBookCover(book) {
+            const cleanIsbn = String(book.isbn || '').replace(/[^0-9]/g, '');
+            if(!cleanIsbn) return null;
+
+            // 1순위: 도서관 정보나루 도서 상세조회 API (다중 프록시 시도)
+            const targetUrl = `https://data4library.kr/api/srchDtlList?authKey=${DEFAULT_API_KEY}&isbn13=${cleanIsbn}&format=json`;
+            const proxies = [
+                `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
+                `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`
+            ];
+
+            for(let proxyUrl of proxies) {
                 try {
-                    const targetUrl = `https://data4library.kr/api/srchDtlList?authKey=${DEFAULT_API_KEY}&isbn13=${book.isbn}&format=json`;
-                    const res = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`);
+                    const res = await fetch(proxyUrl);
                     if(res.ok) {
                         const data = await res.json();
                         const imgUrl = data?.response?.detail?.[0]?.book?.bookImageURL;
-                        if(imgUrl) {
-                            coverCache[book.isbn] = imgUrl;
-                            updated = true;
-                            // 해당 이미지 DOM이 있으면 즉시 교체
-                            const imgEl = document.getElementById(`cover-img-${book.id}`);
-                            if(imgEl) {
-                                imgEl.src = imgUrl;
-                                imgEl.classList.remove('hidden');
-                                const fallbackEl = document.getElementById(`cover-fallback-${book.id}`);
-                                if(fallbackEl) fallbackEl.classList.add('hidden');
-                            }
+                        if(imgUrl && imgUrl.trim() !== '') {
+                            return ensureHttps(imgUrl.trim());
                         }
                     }
                 } catch(e) {}
             }
+
+            // 2순위: Google Books API (한국 도서 ISBN 및 제목 기반 표지 제공)
+            try {
+                const gbRes = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${cleanIsbn}`);
+                if(gbRes.ok) {
+                    const gbData = await gbRes.json();
+                    const thumb = gbData?.items?.[0]?.volumeInfo?.imageLinks?.thumbnail || gbData?.items?.[0]?.volumeInfo?.imageLinks?.smallThumbnail;
+                    if(thumb) {
+                        return ensureHttps(thumb);
+                    }
+                }
+            } catch(e) {}
+
+            return null;
+        }
+
+        // 모든 도서 표지 비동기 로딩 및 화면 즉시 반영
+        async function fetchBookCoversAsync() {
+            let updated = false;
+            for(let book of booksData) {
+                const cleanIsbn = String(book.isbn || '').replace(/[^0-9]/g, '');
+                if(!cleanIsbn) continue;
+
+                // 이미 book 객체 자체에 coverUrl이 있거나 캐시에 있으면 스킵
+                if(book.coverUrl || coverCache[cleanIsbn]) {
+                    const finalUrl = book.coverUrl || coverCache[cleanIsbn];
+                    applyCoverToDom(book.id, finalUrl);
+                    continue;
+                }
+
+                const fetchedUrl = await fetchSingleBookCover(book);
+                if(fetchedUrl) {
+                    coverCache[cleanIsbn] = fetchedUrl;
+                    book.coverUrl = fetchedUrl;
+                    updated = true;
+                    applyCoverToDom(book.id, fetchedUrl);
+                }
+            }
+
             if(updated) {
                 localStorage.setItem('book_cover_cache', JSON.stringify(coverCache));
+                localStorage.setItem('custom_books_data', JSON.stringify(booksData));
             }
+        }
+
+        function applyCoverToDom(bookId, url) {
+            const imgEl = document.getElementById(`cover-img-${bookId}`);
+            const fallbackEl = document.getElementById(`cover-fallback-${bookId}`);
+            if(imgEl && url) {
+                imgEl.src = ensureHttps(url);
+                imgEl.classList.remove('hidden');
+                if(fallbackEl) fallbackEl.classList.add('hidden');
+            }
+        }
+
+        function handleCoverError(imgEl, bookId) {
+            imgEl.classList.add('hidden');
+            const fallbackEl = document.getElementById(`cover-fallback-${bookId}`);
+            if(fallbackEl) fallbackEl.classList.remove('hidden');
         }
 
         function switchTab(tabName) {
@@ -480,6 +534,7 @@
                         else if(rawAge.includes('저학년') || rawAge.includes('초등')) age = '초등 저학년';
 
                         let rawYear = String(row['추천년도'] || row['연도'] || row['년도'] || '2026').replace(/[^0-9]/g, '');
+                        let cleanIsbn = String(row['ISBN'] || row['isbn'] || '').replace(/[^0-9]/g, '');
 
                         return {
                             id: startId + idx,
@@ -490,7 +545,8 @@
                             source: String(row['출처기관'] || row['추천기관'] || '사서추천도서').trim(),
                             year: rawYear || '2026',
                             callNo: String(row['청구기호'] || '청구기호 미상').trim(),
-                            isbn: String(row['ISBN'] || row['isbn'] || '').replace(/[^0-9]/g, ''),
+                            isbn: cleanIsbn,
+                            coverUrl: coverCache[cleanIsbn] || '',
                             desc: String(row['설명'] || row['소개'] || '사서가 추천하는 유익한 도서입니다.').trim()
                         };
                     }).filter(Boolean);
@@ -510,8 +566,8 @@
                     updateAdminBookCount();
                     renderBooks();
                     renderStatsSummary();
-                    fetchBookCoversAsync();
-                    alert(`총 ${parsedBooks.length}권의 추천도서가 성공적으로 반영되었습니다!`);
+                    fetchBookCoversAsync(); // 업로드 직후 표지 이미지 자동 검색 시작
+                    alert(`총 ${parsedBooks.length}권의 추천도서가 반영되었습니다! 표지 이미지를 자동으로 불러옵니다.`);
                 } catch(err) {
                     alert("엑셀 파일을 읽는 중 오류가 발생했습니다. 올바른 엑셀(.xlsx, .xls, .csv) 파일인지 확인해 주세요.");
                 } finally {
@@ -544,7 +600,7 @@
             link.href = URL.createObjectURL(blob);
             link.download = "index.html";
             link.click();
-            alert("방금 올리신 엑셀 도서가 반영된 새 index.html 파일이 다운로드되었습니다. 이 파일을 깃허브에 올리시면 다른 사용자들에게도 똑같이 보입니다!");
+            alert("방금 올리신 엑셀 도서와 표지 정보가 반영된 새 index.html 파일이 다운로드되었습니다. 이 파일을 깃허브에 올리시면 다른 사용자들에게도 똑같이 보입니다!");
         }
 
         function renderStatsSummary() {
@@ -603,13 +659,6 @@
             renderBooks();
         }
 
-        // 책 표지 이미지 로드 실패 시 대체 일러스트 표시
-        function handleCoverError(imgEl, bookId) {
-            imgEl.classList.add('hidden');
-            const fallbackEl = document.getElementById(`cover-fallback-${bookId}`);
-            if(fallbackEl) fallbackEl.classList.remove('hidden');
-        }
-
         function renderBooks() {
             const grid = document.getElementById('book-grid');
             const filtered = booksData.filter(b => {
@@ -632,10 +681,8 @@
 
             grid.innerHTML = filtered.map(book => {
                 const isRented = rentalList.includes(book.id);
-                // 캐시된 정보나루 표지 URL 우선 사용, 없으면 OpenLibrary 표지 URL 시도
-                const coverUrl = (book.isbn && coverCache[book.isbn]) 
-                    ? coverCache[book.isbn] 
-                    : (book.isbn ? `https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg?default=false` : '');
+                const cleanIsbn = String(book.isbn || '').replace(/[^0-9]/g, '');
+                const cachedUrl = book.coverUrl || coverCache[cleanIsbn] || '';
 
                 return `
                     <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:border-emerald-200 transition">
@@ -653,21 +700,20 @@
                             <div class="flex gap-3.5 mb-3">
                                 <!-- 표지 썸네일 -->
                                 <div class="w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-br from-emerald-50 to-amber-50 flex items-center justify-center relative shadow-xs">
-                                    ${coverUrl ? `<img id="cover-img-${book.id}" src="${coverUrl}" alt="${book.title}" onerror="handleCoverError(this, ${book.id})" class="w-full h-full object-cover">` : ''}
-                                    <div id="cover-fallback-${book.id}" class="${coverUrl ? 'hidden' : ''} flex flex-col items-center justify-center p-2 text-center">
+                                    <img id="cover-img-${book.id}" src="${ensureHttps(cachedUrl)}" alt="${book.title}" onerror="handleCoverError(this, ${book.id})" class="${cachedUrl ? '' : 'hidden'} w-full h-full object-cover">
+                                    <div id="cover-fallback-${book.id}" class="${cachedUrl ? 'hidden' : ''} flex flex-col items-center justify-center p-2 text-center">
                                         <span class="text-2xl mb-1">📖</span>
                                         <span class="text-[10px] font-semibold text-emerald-800 line-clamp-2 leading-tight">${book.title}</span>
                                     </div>
                                 </div>
 
-                                <!-- 제목, 저자, 청구기호 (ISBN 숨김) -->
+                                <!-- 제목, 저자, 청구기호 -->
                                 <div class="flex-1 min-w-0 flex flex-col justify-between">
                                     <div>
                                         <h3 class="font-bold text-slate-800 text-base mb-1 leading-snug line-clamp-2">${book.title}</h3>
                                         <p class="text-xs text-slate-500 mb-2 truncate">${book.author} | ${book.category}</p>
                                     </div>
                                     
-                                    <!-- 청구기호만 깔끔하게 표시 -->
                                     <div class="text-[11px] text-slate-600 bg-slate-100/80 px-2.5 py-1.5 rounded-lg font-mono truncate">
                                         <strong class="text-slate-700 font-sans">청구기호:</strong> ${book.callNo}
                                     </div>
